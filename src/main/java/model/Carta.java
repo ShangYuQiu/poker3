@@ -1,13 +1,87 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author shangyu
- */
-public class Carta {
-    
+public class Carta implements Comparable<Carta> {
+
+    private final String simbolo; //El simbolo representativo de la carta A, K, Q ...
+    private final String palo; //Representa el palo al que pertenece la carta
+    private int valor; //Valor real representativo
+    private boolean esdeMesa; //Si la carta es del board o es no comun
+
+    public Carta(String simbolo, String palo) {
+        this.simbolo = simbolo;
+        this.palo = palo;
+        esdeMesa = false;
+        init(); //Parsea la carta a su valor real referencial
+    }
+
+    //Setter
+    public void setValor(int val) {
+        this.valor = val;
+    }
+
+    //Metodos auxiliares
+    //Parsea la carta en un valor numerico de referencia
+    private void init() {
+        try {
+            switch (simbolo) {
+                case "A" ->
+                    valor = 14;
+                case "K" ->
+                    valor = 13;
+                case "Q" ->
+                    valor = 12;
+                case "J" ->
+                    valor = 11;
+                case "T" ->
+                    valor = 10;
+                default ->
+                    valor = Integer.parseInt(simbolo);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
+    }
+
+    //Getters y Setters
+    public int getVal() {
+        return valor;
+    }
+
+    public String getPalo() {
+        return palo;
+    }
+
+    public String getSimb() {
+        return simbolo;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Carta tmp = (Carta) obj;
+        if (this.simbolo.equals(tmp.getSimb()) && this.palo.equals(tmp.getPalo())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return this.simbolo + this.palo;
+    }
+
+    @Override
+    public int compareTo(Carta o) {
+
+        //Orden descendente
+        if (this.valor < o.getVal()) {
+            return 1;
+        } else if (this.valor == o.getVal()) {
+            return 0;
+        } else {
+            return -1;
+        }
+
+        //return o.getVal() - this.valor;
+    }
+
 }

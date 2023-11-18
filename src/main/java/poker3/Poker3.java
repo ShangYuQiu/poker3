@@ -8,6 +8,8 @@ package poker3;
  *
  * @author shangyu
  */
+import controller.Controller;
+
 public class Poker3 {
 
     public static void main(String[] args) {
