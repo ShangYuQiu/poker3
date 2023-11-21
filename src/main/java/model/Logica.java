@@ -3,6 +3,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -53,5 +54,13 @@ public class Logica {
         this.board.remove(c);
     }
     
+    public Carta getRandomCarta(){
+        Random rand = new Random();
+        int indRandom = rand.nextInt(allCarta.size());
+        
+        Carta c = allCarta.get(indRandom);
+        allCarta.remove(c);
+        return c;
+    }
     
 }
