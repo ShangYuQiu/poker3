@@ -14,6 +14,7 @@ public class Jugador {
     
     private List<Carta> cartas;
     private int id;
+    private tJugada mejorJug;
     private double puntos;
     
     public Jugador (List<Carta> c, int id){
@@ -28,5 +29,16 @@ public class Jugador {
     
     public double getPuntos (){
         return puntos;
+    }
+    
+    public tJugada getJugada(){
+        return mejorJug;
+    }
+    
+    public void setPuntos(double d){
+        this.puntos = d;
+    }
+    public void setMejorJugada(tJugada t){
+        this.mejorJug = t;
     }
 }

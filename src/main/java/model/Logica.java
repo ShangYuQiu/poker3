@@ -63,4 +63,10 @@ public class Logica {
         return c;
     }
     
+    
+    //funcion que genera 5 cartas con las cartas que sobra 
+    
+    // mezclar esass 5 cartas con las 2 de cada jugador y evaluar cual de ellos tiene la mejor mano
+    
+    // poner las funciones de evaluar jugadas de la 1 o 2 pract
 }
