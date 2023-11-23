@@ -5,12 +5,10 @@ public class Carta implements Comparable<Carta> {
     private final String simbolo; //El simbolo representativo de la carta A, K, Q ...
     private final String palo; //Representa el palo al que pertenece la carta
     private int valor; //Valor real representativo
-    private boolean esdeMesa; //Si la carta es del board o es no comun
 
     public Carta(String simbolo, String palo) {
         this.simbolo = simbolo;
         this.palo = palo;
-        esdeMesa = false;
         init(); //Parsea la carta a su valor real referencial
     }
 
