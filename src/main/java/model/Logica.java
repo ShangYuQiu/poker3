@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.HashMap;
-import model.*;
 import controller.*;
 
 
@@ -157,9 +156,9 @@ public class Logica {
         Jugada escaleraColor = null;
 
         if (Escalera(c) != null && esMismoPalo(c)) {
-            String msgJugada = "";
+            //String msgJugada = "";
             //String msgJugada = String.format("Straight Flush with %s", this.mano.getStrCartas());
-            escaleraColor = new Jugada(c, tJugada.ESCALERA_COLOR, msgJugada);
+            escaleraColor = new Jugada(c, tJugada.ESCALERA_COLOR);
         }
 
         return escaleraColor;
@@ -213,8 +212,8 @@ public class Logica {
            
             if (cont == 5){
                 //String msgJugada = String.format("Straight with %s", this.mano.getStrCartas());
-                String msgJugada = "";
-                escalera = new Jugada(c, tJugada.ESCALERA, msgJugada);
+                //String msgJugada = "";
+                escalera = new Jugada(c, tJugada.ESCALERA);
                 gutshot = false;
                 roto = false;
                 openended=false;
@@ -286,9 +285,8 @@ public class Logica {
                     c.add(0, tmp);
                 }
                 
-                String msgJugada = "";
                 //String msgJugada = String.format("Four of a kind (%s) with %s", Evaluador.msg.get(cur - 2), getStrCartas());
-                poker = new Jugada(c, tJugada.POKER, msgJugada);
+                poker = new Jugada(c, tJugada.POKER);
                 break;
             }
 
@@ -318,9 +316,9 @@ public class Logica {
                     Carta tmp = lista.remove(0);
                     c.add(0, tmp);
                 }
-                String msgJugada = "";
+                //String msgJugada = "";
                 //String msgJugada = String.format("Full House with %s", getStrCartas());
-                fullHouse = new Jugada(c, tJugada.FULL_HOUSE, msgJugada);
+                fullHouse = new Jugada(c, tJugada.FULL_HOUSE);
             }
 
         }
@@ -390,7 +388,7 @@ public class Logica {
             }
 
             //Extraen los valores de flush y los inserta al incio de la mano
-            flush = new Jugada(lista, tJugada.COLOR, "Flush");
+            flush = new Jugada(lista, tJugada.COLOR);
         } //No hay Flush pero si draw
         else if (contH == 4 || contD == 4 || contC == 4 || contS == 4) {
             //addDraw("Draw: Flush");
@@ -429,9 +427,8 @@ public class Logica {
                 c.add(0, tmp2);
                 c.add(0, tmp);
                 //
-                String msgJugada = "";
                 //String msgJugada = String.format("Three of a kind (%s) with %s", Evaluador.msg.get(cur - 2), getStrCartas());
-                trio = new Jugada(c, tJugada.TRIO, msgJugada);
+                trio = new Jugada(c, tJugada.TRIO);
                 break;
             }
             i++;
@@ -454,9 +451,8 @@ public class Logica {
                 //Se insertan la primera pareja en la mano
                 c.add(0, tmp2);
                 c.add(0, tmp);
-                String msgJugada = "";
                 //String msgJugada = String.format("%s with %s ", "Two pairs", getStrCartas());
-                doblePareja = new Jugada(c, tJugada.DOBLE_PAREJA, msgJugada);
+                doblePareja = new Jugada(c, tJugada.DOBLE_PAREJA);
             }
         }
         return doblePareja;
@@ -478,9 +474,8 @@ public class Logica {
                 c.add(1, tmp2);
 
                 //Forma la cadena de la jugada, por ejemplo: "A pair of Ases with AhAh7h6c2d"
-                String msgJugada = "";
                 //String msgJugada = String.format("Pair of %s with %s", Evaluador.msg.get(cur - 2), getStrCartas());
-                pareja = new Jugada(c, tJugada.PAREJA, msgJugada);
+                pareja = new Jugada(c, tJugada.PAREJA);
                 break;
             }
             i++;
