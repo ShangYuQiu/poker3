@@ -82,7 +82,7 @@ public class Logica {
     //aniadir las cartas boards introducido a la lista board
     public void enterBoardCard(String carta){
         String c[]=carta.split(",");
-        for(int i=0;i<5;i++){
+        for(int i=0;i<c.length;i++){
         Carta card=new Carta(c[i].substring(0, 1),c[i].substring(1, 2));
         board.add(card);
         allCarta.remove(card);
@@ -91,7 +91,7 @@ public class Logica {
     }
     //aniadir las cartas random del jugador elegido a la lista jug
     public void randomJugCard(int jugador){
-            List<Carta> c=new ArrayList<Carta>();
+            List<Carta> c=new ArrayList<>();
             Carta carta1=getRandomCarta();
             c.add(carta1);
             Carta carta2=getRandomCarta();
