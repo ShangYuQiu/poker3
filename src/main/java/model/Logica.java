@@ -141,18 +141,8 @@ public class Logica {
 
             //Si la jugada llega a tener 5 cartas => Escalera Color
             if (tmp.size() == 5) {
-                //Se eliminan de la mano
-                for (int k = 0; k < 5; ++k) {
-                    c.remove(tmp.get(k));   
-                }
-
-                //Se vuelven a insertar al inicio de la mano manteniendo el orden relativo
-                for (int k = 0; k < 5; ++k) {
-                    c.add(0, tmp.remove(0));
-                }
-
                 //String msgJugada = String.format("Straight Flush with %s", getStrCartas());
-                escaleraColor = new Jugada(c, tJugada.ESCALERA_COLOR);
+                escaleraColor = new Jugada(tmp, tJugada.ESCALERA_COLOR);
                 break;
             }
             ++i;
@@ -162,145 +152,110 @@ public class Logica {
     }
 
 
-    private Jugada Escalera(List<Carta> c) {
+    //Comprueba si hay escalera
+    public Jugada Escalera(List<Carta> c) {
         Jugada escalera = null;
-        Collections.sort( c);
-        //Distinguimos casos dependiendo de si la mano contiene Aces o no 
-        List<Carta> tmp = new ArrayList<>(c);
-        if (c.get(0).getSimb().equals("A")){
-            Carta card = new Carta ("A",c.get(0).getPalo());
-            card.setValor(1);
-            tmp.add(card);
 
-        }
+        int i = 0;
+        while (i < c.size()) {
+            ArrayList<Carta> tmp = new ArrayList<>(); //Lista que guarda las carta forma la escalera de color
+            tmp.add(c.get(i));  //Inserta la primera carta a partir de la cual empieza la busqueda       
+            int cur = c.get(i).getVal();    //Valor de la ultima carta que se tiene para formar la jugada
 
-        int cont = 1;
-        boolean roto = false;
-        boolean ace = false;
-        int contR = 0;
-       
-        
-        //caso especial Ace al principio
-        if (tmp.get(0).getSimb().equals("A")){
-            ace = true;
-        }
-        
-        for ( int i = 0; i< tmp.size()-1;i++){
-
-            if ( (tmp.get(i).getVal() - tmp.get(i+1).getVal()) == 1){
-                cont ++;
-            }
-           
-            //gutshot : K Q J 9 8
-            else if ((tmp.get(i).getVal() - tmp.get(i+1).getVal()) == 2){
-                roto = true;
-                contR = cont +1;
-                cont =1;
-                ace = false;
-               
-            }
-            else if ((tmp.get(i).getVal() - tmp.get(i+1).getVal()) > 2){
-                roto = false;
-                contR =0;
-                cont=1;
-                ace = false;
-            }
-           
-            if (cont == 5){
-                
-                List<Carta> aux = new ArrayList<>();
-                for (int j = i; j >= i -4; j--){
-                    aux.add(tmp.get(j));
+            int j = i + 1;
+            while (j < c.size()) {
+                //Si es del mismo valo y su diferencia vale 1
+                if (cur - c.get(j).getVal() == 1) {
+                    tmp.add(c.get(j));   //Se inserta en la lista
+                    cur = c.get(j).getVal();    //Se actualiza el ultimo valor
                 }
-                //String msgJugada = String.format("Straight with %s", this.mano.getStrCartas());
-                //String msgJugada = "";
-                escalera = new Jugada(aux, tJugada.ESCALERA);
-                //gutshot = false;
-                roto = false;
-                //openended=false;
-                contR =0;
-                
+                ++j;
             }
-        }     
-        
+
+            //Si la jugada llega a tener 5 cartas => Escalera 
+            if (tmp.size() >= 5) {
+                escalera = new Jugada(tmp, tJugada.ESCALERA);
+                break;
+            }
+            ++i;
+        }
+
         return escalera;
     }
 
-    //Devuelve el poker si existe (Funciona)
-private Jugada Poker(List<Carta> c) {
+    //Comprueba si hay poker
+    private Jugada Poker(List<Carta> c) {
         Jugada poker = null;
-        Collections.sort(c);
 
         int i = 0;
-        int cont = 1;
-        ArrayList<Carta> lista = new ArrayList<>();
+        while (i < c.size()) {
+            ArrayList<Carta> tmp = new ArrayList<>(); //Lista que guarda las carta forma la escalera de color
+            tmp.add(c.get(i));  //Inserta la primera carta a partir de la cual empieza la busqueda       
+            Carta cur = c.get(i);    //Valor de la ultima carta que se tiene para formar la jugada
 
-        while (i < c.size() - 1) {
-            int cur = c.get(i).getVal();
-            int sig = c.get(i + 1).getVal();
-
-            if (cur == sig) {
-                cont++;
-            } else {
-                cont = 1;
-            }
-
-            if (cont == 4) {
-                int index = i - 2;
-
-                //Quita las 4 cartas iguales
-                for (int j = 0; j < 4; j++) {
-                    Carta tmp = c.remove(index);
-                    lista.add(0, tmp);
+            int j = i + 1;
+            while (j < c.size()) {
+                //Si las 2 cartas es tienen el mismo valor
+                if (cur.getSimb().equals(c.get(j).getSimb())) {
+                    tmp.add(c.get(j));   //Se inserta en la lista
                 }
-
-                //Este seria el kicker (Primero de la mano (Descendente) quitado las 4 cartas iguales)
-                Carta kicker = c.remove(0);
-                lista.add(0, kicker);
-
-                for (int k = 0; k < 5; k++) {
-                    Carta tmp = lista.remove(0);
-                    c.add(0, tmp);
-                }
-
-                //String msgJugada = String.format("Four of a kind (%s) with %s", Evaluador.msg.get(cur - 2), getStrCartas());
-                poker = new Jugada(c, tJugada.POKER);
-                break;
+                ++j;
             }
-
+            //Si la jugada llega a tener al menos 4 cartas => quad
+            if (tmp.size() >= 4) {
+                if (!tmp.isEmpty()) {
+                    poker = new Jugada(tmp, tJugada.POKER);
+                    break;
+                }
+            }
             ++i;
         }
 
         return poker;
     }
 
-    //Devuelve un Full House (Funciona)
-private Jugada FullHouse(List<Carta> c) {
+    //Comprueba si hay full house
+    private Jugada FullHouse(List<Carta> c) {
         Jugada fullHouse = null;
-        Collections.sort(c);
-
+        boolean trio = false;
+        List<Carta> tmp = new ArrayList<>(c);
         //Lista auxiliar que almacenan las cartas que forman el Full House
         ArrayList<Carta> lista = new ArrayList<>();
+        int cont = 1;
+        int i = 0;
 
-        if (Trio(c) != null) {
-            lista.add(0, c.remove(0));
-            lista.add(0, c.remove(0));
-            lista.add(0, c.remove(0));
+        while (i < tmp.size() - 1) {
+            int cur = tmp.get(i).getVal();
+            int sig = tmp.get(i + 1).getVal();
 
-            if (Pareja(c) != null) {
-                lista.add(0, c.remove(0));
-                lista.add(0, c.remove(0));
-
-                for (int i = 0; i < 5; ++i) {
-                    Carta tmp = lista.remove(0);
-                    c.add(0, tmp);
+            if (cur == sig) {
+                cont++;
+                if (cont == 3) {
+                    lista.add(tmp.get(i - 1));
+                    lista.add(tmp.get(i));
+                    lista.add(tmp.get(i + 1));
+                    trio = true;
+                    cont = 1;
                 }
-                //String msgJugada = String.format("Full House with %s", getStrCartas());
-                fullHouse = new Jugada(c, tJugada.FULL_HOUSE);
-            }else{
-                c.add(0,lista.remove(0));
-                c.add(0,lista.remove(0));
-                c.add(0,lista.remove(0));
+            } else {//si se corta en medio                             
+                if (cont == 2) {
+
+                    lista.add(tmp.get(i - 1));
+                    lista.add(tmp.get(i));
+                }
+                cont = 1;
+            }
+
+            if (i == tmp.size() - 2 && cont == 2) {
+                lista.add(tmp.get(i - 1));
+                lista.add(tmp.get(i));
+            }
+            i++;
+        }
+
+        if (lista.size() > 4 && trio) {
+            if (!lista.isEmpty()) {
+                fullHouse = new Jugada(tmp, tJugada.FULL_HOUSE);
             }
         }
         return fullHouse;
@@ -370,29 +325,18 @@ private Jugada FullHouse(List<Carta> c) {
                 }
             }
             
-            for (int j = index; j >= 0; --j) {
-                if (c.get(j).getPalo().equals(palo)) {
-                    Carta tmp = c.remove(j);
-                    lista.add(tmp);
-                }
-            }
-
-            //Extraen los valores de flush y los inserta al incio de la mano
-            for (int k = 0; k < 5; ++k) {
-                Carta tmp = lista.remove(0);
-                c.add(0, tmp);
-            }
-            flush = new Jugada(c, tJugada.COLOR);
+            flush = new Jugada(lista, tJugada.COLOR);
         }
 
         return flush;
     }
- //Devuelve el mejor trio (Funciona)
-    private Jugada Trio(List<Carta> c) {
+    
+    //Comprueba si hay trio
+    public Jugada Trio(List<Carta> c) { // return lista 
         Jugada trio = null;
-        Collections.sort(c);
         int i = 0;
         int cont = 1;   //Numero de cartas del trio actual
+        List<Carta> trios = new ArrayList<>();
 
         while (i < c.size() - 1) {
             int cur = c.get(i).getVal();
@@ -405,21 +349,14 @@ private Jugada FullHouse(List<Carta> c) {
             else {
                 cont = 1;
             }
-
-            //Si hay trio
+            //Si hay posibilidad de trio
             if (cont == 3) {
-                //Quitamos esas cartas de la mano para insertarlas al inicio 
-                int index = i - 1;
-                Carta tmp = c.remove(index);
-                Carta tmp2 = c.remove(index);
-                Carta tmp3 = c.remove(index);
-                //Los insertamos de esta manera para que se mantenga el orden relativo
-                c.add(0, tmp3);
-                c.add(0, tmp2);
-                c.add(0, tmp);
-                //
-                //String msgJugada = String.format("Three of a kind (%s) with %s", Evaluador.msg.get(cur - 2), getStrCartas());
-                trio = new Jugada(c, tJugada.TRIO);
+                //Almacenamos las cartas que forman el trio
+                trios.add(c.get(i - 1));
+                trios.add(c.get(i));
+                trios.add(c.get(i + 1));
+                //quitamos de la lista de trios las cartas de board
+                trio = new Jugada(trios, tJugada.TRIO);
                 break;
             }
             i++;
@@ -427,6 +364,7 @@ private Jugada FullHouse(List<Carta> c) {
         return trio;
     }
 
+    // to do
     //Devuelve la mejor doble pareja (Funciona)
     private Jugada DoblePareja(List<Carta> c) {
         Jugada doblePareja = null;
@@ -453,21 +391,20 @@ private Jugada FullHouse(List<Carta> c) {
     private Jugada Pareja(List<Carta> c) {
         Jugada pareja = null;
         Collections.sort(c);
-
+        
+        
         int i = 0;
         while (i < c.size() - 1) {
             int cur = c.get(i).getVal();
             int sig = c.get(i + 1).getVal();
             if (cur == sig) {
                 //Mete la pareja de carta al principio de la jugada
-                Carta tmp = c.remove(i);
-                Carta tmp2 = c.remove(i);
-                c.add(0, tmp);
-                c.add(1, tmp2);
-
+               List<Carta> aux = new ArrayList<>();
+               aux.add(c.get(cur));
+               aux.add(c.get(sig));
                 //Forma la cadena de la jugada, por ejemplo: "A pair of Ases with AhAh7h6c2d"
                // String msgJugada = String.format("Pair of %s with %s", Evaluador.msg.get(cur - 2), getStrCartas());
-                pareja = new Jugada(c, tJugada.PAREJA);
+                pareja = new Jugada(aux, tJugada.PAREJA);
                 break;
             }
             i++;
