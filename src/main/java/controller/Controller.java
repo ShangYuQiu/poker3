@@ -46,5 +46,8 @@ public class Controller {
     public void enterBoardCard(String carta){
         logica.enterBoardCard(carta);
     }
+    public void setLogica(){
+        this.logica=new Logica();
+    }
             
 }

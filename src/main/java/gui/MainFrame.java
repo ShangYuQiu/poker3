@@ -53,33 +53,33 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabelJ6C2 = new javax.swing.JLabel();
         jLabelJ6C1 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jLabelEquity6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabelJ3C2 = new javax.swing.JLabel();
         jLabelJ3C1 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabelEquity3 = new javax.swing.JLabel();
         jPanelJ1 = new javax.swing.JPanel();
         jLbelJ1 = new javax.swing.JLabel();
         jLabelJ1C2 = new javax.swing.JLabel();
         jLabelJ1C1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabelEquity1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabelJ4C2 = new javax.swing.JLabel();
         jLabelJ4C1 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jLabelEquity4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabelJ2C2 = new javax.swing.JLabel();
         jLabelJ2C1 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        jLabelEquity2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabelJ5C2 = new javax.swing.JLabel();
         jLabelJ5C1 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jLabelEquity5 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabelBoardC1 = new javax.swing.JLabel();
         jLabelBoardC2 = new javax.swing.JLabel();
@@ -120,7 +120,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setText("jugador6");
 
-        jLabel13.setText("0,00%");
+        jLabelEquity6.setText("0,00%");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,7 +138,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jLabelJ6C2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelEquity6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -151,13 +151,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabelJ6C1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelJ6C2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEquity6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jLabel2.setText("jugador3");
 
-        jLabel14.setText("0,00%");
+        jLabelEquity3.setText("0,00%");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -176,7 +176,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jLabelJ3C2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelEquity3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -189,13 +189,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabelJ3C1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelJ3C2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEquity3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jLbelJ1.setText("jugador1");
 
-        jLabel11.setText("0,00%");
+        jLabelEquity1.setText("0,00%");
 
         javax.swing.GroupLayout jPanelJ1Layout = new javax.swing.GroupLayout(jPanelJ1);
         jPanelJ1.setLayout(jPanelJ1Layout);
@@ -216,7 +216,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanelJ1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelJ1Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelEquity1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelJ1Layout.createSequentialGroup()
                         .addComponent(jLbelJ1)
@@ -232,14 +232,14 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabelJ1C1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelJ1C2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEquity1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel10))
         );
 
         jLabel4.setText("jugador4");
 
-        jLabel16.setText("0,00%");
+        jLabelEquity4.setText("0,00%");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -258,7 +258,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(44, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEquity4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
         );
         jPanel4Layout.setVerticalGroup(
@@ -271,13 +271,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabelJ4C1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelJ4C2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEquity4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel5.setText("jugador2");
 
-        jLabel12.setText("0,00%");
+        jLabelEquity2.setText("0,00%");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -285,7 +285,7 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEquity2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,13 +309,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabelJ2C1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelJ2C2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEquity2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jLabel6.setText("jugador5");
 
-        jLabel15.setText("0,00%");
+        jLabelEquity5.setText("0,00%");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -325,7 +325,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(70, 92, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelEquity5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -347,7 +347,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabelJ5C1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelJ5C2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEquity5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -997,11 +997,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         // TODO add your handling code here:
+        this.controller.setLogica();
         init();
         //jugador1
         jButtonRandom1.setEnabled(true);
         jTextField1.setEnabled(true);
         jButtonEnter1.setEnabled(true);
+        
         //jugador2
         jButtonRandom2.setEnabled(true);
         jTextField2.setEnabled(true);
@@ -1089,12 +1091,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRandom6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -1111,6 +1107,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBoardC3;
     private javax.swing.JLabel jLabelBoardC4;
     private javax.swing.JLabel jLabelBoardC5;
+    private javax.swing.JLabel jLabelEquity1;
+    private javax.swing.JLabel jLabelEquity2;
+    private javax.swing.JLabel jLabelEquity3;
+    private javax.swing.JLabel jLabelEquity4;
+    private javax.swing.JLabel jLabelEquity5;
+    private javax.swing.JLabel jLabelEquity6;
     private javax.swing.JLabel jLabelJ1C1;
     private javax.swing.JLabel jLabelJ1C2;
     private javax.swing.JLabel jLabelJ2C1;

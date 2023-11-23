@@ -267,7 +267,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                          <Component id="jLabel13" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="jLabelEquity6" min="-2" pref="58" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="44" max="32767" attributes="0"/>
@@ -285,7 +285,7 @@
                       <Component id="jLabelJ6C2" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel13" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="jLabelEquity6" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -301,7 +301,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelJ6C1">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel13">
+        <Component class="javax.swing.JLabel" name="jLabelEquity6">
           <Properties>
             <Property name="text" type="java.lang.String" value="0,00%"/>
           </Properties>
@@ -328,7 +328,7 @@
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel14" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="jLabelEquity3" min="-2" pref="58" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -346,7 +346,7 @@
                       <Component id="jLabelJ3C2" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel14" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="jLabelEquity3" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -362,7 +362,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelJ3C1">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel14">
+        <Component class="javax.swing.JLabel" name="jLabelEquity3">
           <Properties>
             <Property name="text" type="java.lang.String" value="0,00%"/>
           </Properties>
@@ -393,7 +393,7 @@
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel11" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="jLabelEquity1" min="-2" pref="58" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -415,7 +415,7 @@
                       <Component id="jLabelJ1C2" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel11" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="jLabelEquity1" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -434,7 +434,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel11">
+        <Component class="javax.swing.JLabel" name="jLabelEquity1">
           <Properties>
             <Property name="text" type="java.lang.String" value="0,00%"/>
           </Properties>
@@ -463,7 +463,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="jLabel16" min="-2" pref="58" max="-2" attributes="0"/>
+                  <Component id="jLabelEquity4" min="-2" pref="58" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -479,7 +479,7 @@
                       <Component id="jLabelJ4C2" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel16" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="jLabelEquity4" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -495,7 +495,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelJ4C1">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel16">
+        <Component class="javax.swing.JLabel" name="jLabelEquity4">
           <Properties>
             <Property name="text" type="java.lang.String" value="0,00%"/>
           </Properties>
@@ -509,7 +509,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="jLabel12" min="-2" pref="58" max="-2" attributes="0"/>
+                  <Component id="jLabelEquity2" min="-2" pref="58" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
@@ -540,7 +540,7 @@
                       <Component id="jLabelJ2C2" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel12" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="jLabelEquity2" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -556,7 +556,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelJ2C1">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel12">
+        <Component class="javax.swing.JLabel" name="jLabelEquity2">
           <Properties>
             <Property name="text" type="java.lang.String" value="0,00%"/>
           </Properties>
@@ -572,7 +572,7 @@
                   <EmptySpace min="70" pref="92" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel15" min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="jLabelEquity5" min="-2" pref="58" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -601,7 +601,7 @@
                       <Component id="jLabelJ5C2" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel15" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="jLabelEquity5" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -617,7 +617,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelJ5C1">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel15">
+        <Component class="javax.swing.JLabel" name="jLabelEquity5">
           <Properties>
             <Property name="text" type="java.lang.String" value="0,00%"/>
           </Properties>
