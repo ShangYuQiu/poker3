@@ -1,4 +1,3 @@
-
 package model;
 
 import controller.Controller;
@@ -8,119 +7,119 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.HashMap;
-import controller.*;
 
 
-public class Logica {
-    
+public class Logic {
+
     private static String simb[] = {"A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"};
     private static String palos[] = {"h", "d", "s", "c"};
-    
+
     private List<Carta> board;
-    private List<Carta> allCarta;
-    private Map<Integer,List<Carta>> jug;
+    private List<Carta> cartasRestantes;
+    private Map<Integer, List<Carta>> jugadores;
     private Controller controller;
-    public Logica (){
+
+    public Logic() {
         board = new SortedArrayList<>();
-        jug = new  HashMap<>();
-        allCarta=new ArrayList<>();
+        jugadores = new HashMap<>();
+        cartasRestantes = new ArrayList<>();
         init();
     }
-    
-    public void init(){
-        
-        for (int i  = 0; i < 13; i++){
-        
-            for (int j = 0; j < 4; j++){
-            
-                Carta c = new Carta (simb[i], palos[j]);
-                
-                allCarta.add(c);
-                
+
+    //Inicializa las 52 cartas
+    public void init() {
+        for (int i = 0; i < 13; i++) {
+            for (int j = 0; j < 4; j++) {
+                Carta c = new Carta(simb[i], palos[j]);
+                cartasRestantes.add(c);
             }
         }
     }
-    
-    //revisar
-    public void eliminarRep(){
-        allCarta.removeAll(board);
-        
-        for (int i = 0; i < 6; i++){
-            allCarta.removeAll(jug.get(i));
+
+    //Elimina las cartas duplicadas 
+    public void eliminarRep() {
+        cartasRestantes.removeAll(board);
+        for (int i = 0; i < 6; i++) {
+            cartasRestantes.removeAll(jugadores.get(i));
         }
-        
     }
-    public void addBoard(Carta c){
+
+    public void addBoard(Carta c) {
         this.board.add(c);
     }
-    
-    public void removeBoard (Carta c){
+
+    public void removeBoard(Carta c) {
         this.board.remove(c);
     }
-    
-    public Carta getRandomCarta(){
+
+    public Carta getRandomCarta() {
         Random rand = new Random();
-        int indRandom = rand.nextInt(allCarta.size());
-        
-        Carta c = allCarta.get(indRandom);
-        allCarta.remove(c);
+        int indRandom = rand.nextInt(cartasRestantes.size());
+
+        Carta c = cartasRestantes.get(indRandom);
         return c;
     }
-    //aniadir las cartas introducido por el jugador elegido a la lista jug
-    public void enterJugCard(int jugador, String carta){
-        String c[]=carta.split(",");
-        List<Carta> card=new ArrayList<>();
-        Carta card1=new Carta(c[0].substring(0, 1),c[0].substring(1, 2));
-        Carta card2=new Carta(c[1].substring(0, 1),c[1].substring(1, 2));
+
+    //Inicializa nuevo jugador con sus cartas
+    public void enterJugCard(int jugador, String carta) {
+        String c[] = carta.split(",");
+        List<Carta> card = new ArrayList<>();
+        Carta card1 = new Carta(c[0].substring(0, 1), c[0].substring(1, 2));
+        Carta card2 = new Carta(c[1].substring(0, 1), c[1].substring(1, 2));
         card.add(card1);
         card.add(card2);
-        allCarta.remove(card1);
-        allCarta.remove(card2);
-        jug.put(jugador,card);
+        cartasRestantes.remove(card1);
+        cartasRestantes.remove(card2);
+        jugadores.put(jugador, card);
     }
-    //aniadir las cartas boards introducido a la lista board
-    public void enterBoardCard(String carta){
-        String c[]=carta.split(",");
-        for(int i=0;i<5;i++){
-        Carta card=new Carta(c[i].substring(0, 1),c[i].substring(1, 2));
-        board.add(card);
-        allCarta.remove(card);
+
+    //Inicializar el board
+    public void enterBoardCard(String carta) {
+        String c[] = carta.split(",");
+        for (int i = 0; i < 5; i++) {
+            Carta card = new Carta(c[i].substring(0, 1), c[i].substring(1, 2));
+            board.add(card);
+            cartasRestantes.remove(card);
         }
-    
+
     }
-    //aniadir las cartas random del jugador elegido a la lista jug
-    public void randomJugCard(int jugador){
-            List<Carta> c=new ArrayList<Carta>();
-            Carta carta1=getRandomCarta();
-            c.add(carta1);
-            Carta carta2=getRandomCarta();
-            c.add(carta2);
-            jug.put(jugador,c);
+
+    //Insertar cartas random al jugador seleccionado
+    public void randomJugCard(int jugador) {
+        List<Carta> c = new ArrayList<>();       
+        Carta carta1 = getRandomCarta();
+        c.add(carta1);
+        cartasRestantes.remove(carta1);       
+        Carta carta2 = getRandomCarta();
+        c.add(carta2);
+        cartasRestantes.remove(carta2);      
+        jugadores.put(jugador, c);
     }
-    //devuelve cartas del jugador elegido
-    public List<Carta> getJugadorCarta(int jugador){
-        return jug.get(jugador);
+
+    //Devuelve las cartas de un jugador
+    public List<Carta> getJugadorCarta(int jugador) {
+        return jugadores.get(jugador);
     }
+
     public void setController(Controller controller) {
         this.controller = controller;
     }
-    //aniadir las cartas random del board a la lista board
-    public void randomBoardCard(){
-        Carta carta=getRandomCarta();
+
+    //Insertar nueva carta random en el board
+    public void randomBoardCard() {
+        Carta carta = getRandomCarta();
         addBoard(carta);
     }
-    //devuelve las cartas board
-    public List<Carta> getBoardCard(){
+
+    //Devuelve las cartas board
+    public List<Carta> getBoardCard() {
         return board;
     }
-    //funcion que genera 5 cartas con las cartas que sobra 
     
+    //funcion que genera 5 cartas con las cartas que quedan 
     // mezclar esass 5 cartas con las 2 de cada jugador y evaluar cual de ellos tiene la mejor mano
-    
     // poner las funciones de evaluar jugadas de la 1 o 2 pract
-    
     // devolver en vez de Jugada , tJugada mejor ???
-    
     /*-------------------------------------METODOS PRIVADOS-------------------------------------------*/
     //Comprobar que todas las cartas son del mismo palo 
     private boolean esMismoPalo(List<Carta> c) {
@@ -134,20 +133,6 @@ public class Logica {
             i++;
         }
         return mismoPalo;
-    }
-
-    //Comprobar que todas las cartas son del mismo valor independientemente del palo
-    private boolean esMismoValor(List<Carta> c) {
-        boolean mismoValor = true;
-        int i = 1;
-        int primValor = c.get(0).getVal();
-        while (i < c.size() && mismoValor) {
-            if (primValor != c.get(i).getVal()) {
-                mismoValor = false;
-            }
-            i++;
-        }
-        return mismoValor;
     }
 
     /*--------------------------------------------------------------------------------------------------*/
@@ -166,11 +151,11 @@ public class Logica {
 
     private Jugada Escalera(List<Carta> c) {
         Jugada escalera = null;
-        Collections.sort( c);
+        Collections.sort(c);
         //Distinguimos casos dependiendo de si la mano contiene Aces o no 
         List<Carta> tmp = new ArrayList<>(c);
-        if (c.get(0).getSimb().equals("A")){
-            Carta card = new Carta ("A",c.get(0).getPalo());
+        if (c.get(0).getSimb().equals("A")) {
+            Carta card = new Carta("A", c.get(0).getPalo());
             card.setValor(1);
             tmp.add(card);
 
@@ -182,70 +167,59 @@ public class Logica {
         boolean roto = false;
         boolean ace = false;
         int contR = 0;
-       
-        
+
         //caso especial Ace al principio
-        if (tmp.get(0).getSimb().equals("A")){
+        if (tmp.get(0).getSimb().equals("A")) {
             ace = true;
         }
-        
-        for ( int i = 0; i< tmp.size()-1;i++){
 
-            if ( (tmp.get(i).getVal() - tmp.get(i+1).getVal()) == 1){
-                cont ++;
-            }
-           
-            //gutshot : K Q J 9 8
-            else if ((tmp.get(i).getVal() - tmp.get(i+1).getVal()) == 2){
+        for (int i = 0; i < tmp.size() - 1; i++) {
+
+            if ((tmp.get(i).getVal() - tmp.get(i + 1).getVal()) == 1) {
+                cont++;
+            } //gutshot : K Q J 9 8
+            else if ((tmp.get(i).getVal() - tmp.get(i + 1).getVal()) == 2) {
                 roto = true;
-                contR = cont +1;
-                cont =1;
+                contR = cont + 1;
+                cont = 1;
                 ace = false;
-               
-            }
-            else if ((tmp.get(i).getVal() - tmp.get(i+1).getVal()) > 2){
+
+            } else if ((tmp.get(i).getVal() - tmp.get(i + 1).getVal()) > 2) {
                 roto = false;
-                contR =0;
-                cont=1;
+                contR = 0;
+                cont = 1;
                 ace = false;
             }
-           
-            if (cont == 5){
+
+            if (cont == 5) {
                 //String msgJugada = String.format("Straight with %s", this.mano.getStrCartas());
                 //String msgJugada = "";
                 escalera = new Jugada(c, tJugada.ESCALERA);
                 gutshot = false;
                 roto = false;
-                openended=false;
-                contR =0;
-                
-            }
-           
-            else if ( cont == 4 && !ace){
-                openended = true;
-                
-            }
-           
-            else if ( cont == 4 && ace){
-                gutshot=true;
-            }
-            else if ( cont > 0 && roto && contR > 0 ){
-                if ( cont + contR == 5){
-                gutshot=true;
-                roto = false;
+                openended = false;
                 contR = 0;
+
+            } else if (cont == 4 && !ace) {
+                openended = true;
+
+            } else if (cont == 4 && ace) {
+                gutshot = true;
+            } else if (cont > 0 && roto && contR > 0) {
+                if (cont + contR == 5) {
+                    gutshot = true;
+                    roto = false;
+                    contR = 0;
                 }
             }
         }
-       
-        if (openended == true){
-             //addDraw("Draw: Straight Open ended");
-        }
-       
-        else if ( gutshot == true){
+
+        if (openended == true) {
+            //addDraw("Draw: Straight Open ended");
+        } else if (gutshot == true) {
             //addDraw("Draw: Straight Gutshot");
-        }       
-        
+        }
+
         return escalera;
     }
 
@@ -260,7 +234,7 @@ public class Logica {
         while (i < c.size() - 1) {
             int cur = c.get(i).getVal();
             int sig = c.get(i + 1).getVal();
-            
+
             if (cur == sig) {
                 cont++;
             } else {
@@ -277,14 +251,14 @@ public class Logica {
                 }
 
                 //Este seria el kicker (Primero de la mano (Descendente) quitado las 4 cartas iguales)
-                Carta kicker = c.remove(0); 
+                Carta kicker = c.remove(0);
                 lista.add(0, kicker);
 
                 for (int k = 0; k < 5; k++) {
                     Carta tmp = lista.remove(0);
                     c.add(0, tmp);
                 }
-                
+
                 //String msgJugada = String.format("Four of a kind (%s) with %s", Evaluador.msg.get(cur - 2), getStrCartas());
                 poker = new Jugada(c, tJugada.POKER);
                 break;
@@ -382,8 +356,8 @@ public class Logica {
 
             //Recorrido en sentido inverso desde index
             for (int j = index; j >= 0; --j) {
-                if (c.get(j).getPalo().equals(palo)){
-                    lista.add (c.get(j));
+                if (c.get(j).getPalo().equals(palo)) {
+                    lista.add(c.get(j));
                 }
             }
 

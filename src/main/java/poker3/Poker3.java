@@ -15,7 +15,7 @@ import model.*;
 public class Poker3 {
 
     public static void main(String[] args) {
-        Logica logica=new Logica();
+        Logic logica=new Logic();
         MainFrame frame = new MainFrame();
         Controller controller = new Controller(logica,frame);
         logica.setController(controller);
