@@ -13,10 +13,10 @@ import model.*;
 public class Controller {
 
     private MainFrame frame;
-    private Logica logica;
+    private Logic logica;
     
 
-    public Controller(Logica logica,MainFrame frame) {
+    public Controller(Logic logica,MainFrame frame) {
         this.frame = frame;
         this.logica=logica;
        
@@ -47,7 +47,7 @@ public class Controller {
         logica.enterBoardCard(carta);
     }
     public void setLogica(){
-        this.logica=new Logica();
+        this.logica=new Logic();
     }
             
 }
