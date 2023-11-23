@@ -23,7 +23,7 @@ public class Jugador {
         puntos = 0;
     }
     
-    public List<Carta>getCartas(){
+    public List<Carta> getCartas(){
         return cartas;
     }
     

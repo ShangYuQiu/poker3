@@ -1,15 +1,17 @@
 
 package model;
 
+import controller.Controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.HashMap;
+import model.*;
+import controller.*;
 
-/**
- *
- * @author shangyu
- */
+
 public class Logica {
     
     private static String simb[] = {"A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"};
@@ -18,11 +20,12 @@ public class Logica {
     private List<Carta> board;
     private List<Carta> allCarta;
     private List<Jugador> jug;
-    
+    private Controller controller;
     public Logica (){
-    
         board = new SortedArrayList<>();
         jug = new ArrayList <>(6);
+        allCarta=new ArrayList<>();
+        init();
     }
     
     public void init(){
@@ -34,6 +37,7 @@ public class Logica {
                 Carta c = new Carta (simb[i], palos[j]);
                 
                 allCarta.add(c);
+                
             }
         }
     }
@@ -63,8 +67,55 @@ public class Logica {
         allCarta.remove(c);
         return c;
     }
+    //aniadir las cartas introducido por el jugador elegido a la lista jug
+    public void enterJugCard(int jugador, String carta){
+        String c[]=carta.split(",");
+        List<Carta> card=new ArrayList<>();
+        Carta card1=new Carta(c[0].substring(0, 1),c[0].substring(1, 2));
+        Carta card2=new Carta(c[1].substring(0, 1),c[1].substring(1, 2));
+        card.add(card1);
+        card.add(card2);
+        allCarta.remove(card1);
+        allCarta.remove(card2);
+        Jugador j=new Jugador(card,jugador);
+        jug.add(j);
+    }
+    //aniadir las cartas boards introducido a la lista board
+    public void enterBoardCard(String carta){
+        String c[]=carta.split(",");
+        for(int i=0;i<5;i++){
+        Carta card=new Carta(c[i].substring(0, 1),c[i].substring(1, 2));
+        board.add(card);
+        allCarta.remove(card);
+        }
     
-    
+    }
+    //aniadir las cartas random del jugador elegido a la lista jug
+    public void randomJugCard(int jugador){
+            List<Carta> c=new ArrayList<Carta>();
+            Carta carta1=getRandomCarta();
+            c.add(carta1);
+            Carta carta2=getRandomCarta();
+            c.add(carta2);
+            Jugador j=new Jugador(c,jugador);
+            jug.add(j);
+    }
+    //devuelve cartas del jugador elegido
+    public List<Carta> getJugadorCarta(int jugador){
+        return jug.get(jugador).getCartas();
+    }
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+    //aniadir las cartas random del board a la lista board
+    public void randomBoardCard(){
+        Carta carta=getRandomCarta();
+        addBoard(carta);
+    }
+    //devuelve las cartas board
+    public List<Carta> getBoardCard(){
+        return board;
+    }
     //funcion que genera 5 cartas con las cartas que sobra 
     
     // mezclar esass 5 cartas con las 2 de cada jugador y evaluar cual de ellos tiene la mejor mano
