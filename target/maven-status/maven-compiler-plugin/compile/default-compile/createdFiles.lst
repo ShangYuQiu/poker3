@@ -18,10 +18,12 @@ gui\MainFrame$20.class
 gui\MainFrame$4.class
 gui\MainFrame$10.class
 gui\MainFrame$17.class
+gui\MainFrame$23.class
 model\Logica.class
 gui\MainFrame$13.class
 gui\MainFrame$9.class
 gui\MainFrame$19.class
+model\Jugada.class
 gui\MainFrame$11.class
 gui\MainFrame$21.class
 model\SortedArrayList.class

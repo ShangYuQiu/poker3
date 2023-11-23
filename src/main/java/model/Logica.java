@@ -19,11 +19,11 @@ public class Logica {
     
     private List<Carta> board;
     private List<Carta> allCarta;
-    private List<Jugador> jug;
+    private Map<Integer,List<Carta>> jug;
     private Controller controller;
     public Logica (){
         board = new SortedArrayList<>();
-        jug = new ArrayList <>(6);
+        jug = new  HashMap<>();
         allCarta=new ArrayList<>();
         init();
     }
@@ -47,7 +47,7 @@ public class Logica {
         allCarta.removeAll(board);
         
         for (int i = 0; i < 6; i++){
-            allCarta.removeAll(jug.get(i).getCartas());
+            allCarta.removeAll(jug.get(i));
         }
         
     }
@@ -77,8 +77,7 @@ public class Logica {
         card.add(card2);
         allCarta.remove(card1);
         allCarta.remove(card2);
-        Jugador j=new Jugador(card,jugador);
-        jug.add(j);
+        jug.put(jugador,card);
     }
     //aniadir las cartas boards introducido a la lista board
     public void enterBoardCard(String carta){
@@ -97,12 +96,11 @@ public class Logica {
             c.add(carta1);
             Carta carta2=getRandomCarta();
             c.add(carta2);
-            Jugador j=new Jugador(c,jugador);
-            jug.add(j);
+            jug.put(jugador,c);
     }
     //devuelve cartas del jugador elegido
     public List<Carta> getJugadorCarta(int jugador){
-        return jug.get(jugador).getCartas();
+        return jug.get(jugador);
     }
     public void setController(Controller controller) {
         this.controller = controller;
