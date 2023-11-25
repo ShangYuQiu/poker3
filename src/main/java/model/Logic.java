@@ -18,6 +18,7 @@ public class Logic {
     private Map<Integer, List<Carta>> jugadores;    //El numero de jugador y su mano de cartas
     private List<List<Carta>> combinaciones;    //Todas las combinaciones de cartas con los elementos de cartasRestantes
     private Controller controller;
+    public int numComb = 0;
 
     public Logic() {
         this.board = new SortedArrayList<>();
@@ -38,7 +39,7 @@ public class Logic {
     }
 
     //Funcion recursiva forman todas las combinaciones posibles segun el tamaño
-    public void generarCombinaciones(List<Carta> cartas, int tamCombinacion, List<Carta> combinacionActual, int indice) {
+    private void generarCombinaciones(List<Carta> cartas, int tamCombinacion, List<Carta> combinacionActual, int indice) {
         if (combinacionActual.size() == tamCombinacion) {
             this.combinaciones.add(new ArrayList<>(combinacionActual));
             return;
@@ -49,6 +50,71 @@ public class Logic {
             generarCombinaciones(cartas, tamCombinacion, combinacionActual, i + 1);
             combinacionActual.remove(combinacionActual.size() - 1);
         }
+    }
+
+    //Calcula el combo de una mano
+    private Jugada evalue(List<Carta> mano) {
+        //Combina las cartas del board con las de la mano
+        List<Carta> cartas = new SortedArrayList<>();
+        cartas.addAll(mano);
+
+        Jugada jugada = null;
+
+        //Comprueba si se forma una de las siguientes jugadas
+        if ((jugada = EscaleraColor(cartas)) != null) {
+            return jugada;
+        } else if ((jugada = Poker(cartas)) != null) {
+            return jugada;
+        } else if ((jugada = FullHouse(cartas)) != null) {
+            return jugada;
+        } else if ((jugada = Flush(cartas)) != null) {
+            return jugada;
+        } else if ((jugada = Escalera(cartas)) != null) {
+            return jugada;
+        } else if ((jugada = Trio(cartas)) != null) {
+            return jugada;
+        } else if ((jugada = DoblePareja(cartas)) != null) {
+            return jugada;
+        } else if ((jugada = Pareja(cartas)) != null) {
+            return jugada;
+        }
+
+        return new Jugada(cartas, tJugada.CARTA_ALTA);
+    }
+
+    //Calcular el equity para cada jugador segun el board
+    public void calcularEquityJugadores(int numCartasAleatorias) {
+        this.combinaciones.clear(); //Vaciar la lista de combinaciones 
+        List<Carta> combinacionActual = new ArrayList<>();
+
+        //Generar las combinaciones segun la fase de juego, preflop, turn...
+        generarCombinaciones(this.cartasRestantes, numCartasAleatorias, combinacionActual, 0);
+
+        //Para cada posible combinacion
+        for (List<Carta> combinacion : this.combinaciones) {
+
+            //La lista de cartas, sumando las del board y las del jugador
+            List<Carta> cartas = new SortedArrayList<>();
+
+            for (Map.Entry<Integer, List<Carta>> entrada : this.jugadores.entrySet()) {
+                Integer numJugador = entrada.getKey();
+                List<Carta> manoJugador = entrada.getValue();
+
+                //Inserta todas las cartas del board de manera ordenada
+                cartas.addAll(combinacion);
+                //Inserta las cartas de la mano del jugador
+                cartas.addAll(manoJugador);
+
+                //Listo para ver si forma alguna jugada
+                Jugada jugada = evalue(cartas);
+
+                //TODO 
+                
+                //Borrar las cartas de la mano del jugador
+                cartas.clear();
+            }
+        }
+
     }
 
     //Elimina las cartas duplicadas 
