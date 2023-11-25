@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
@@ -10,7 +11,7 @@ public class Jugador {
     private double puntos;
 
     public Jugador(List<Carta> c, int id) {
-        this.cartas = c;
+        this.cartas = new ArrayList<>(c);
         this.id = id;
         puntos = 0;
     }
@@ -25,6 +26,10 @@ public class Jugador {
 
     public tJugada getJugada() {
         return mejorJugada;
+    }
+    
+    public void sumaPuntos(double d){
+        this.puntos += d;
     }
 
     public void setPuntos(double d) {

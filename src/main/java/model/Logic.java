@@ -15,10 +15,9 @@ public class Logic {
 
     private List<Carta> board;  //Cartas del board
     private List<Carta> cartasRestantes;    //Todas las cartas sin contar con las de las manos de los jugadores ni el del board
-    private Map<Integer, List<Carta>> jugadores;    //El numero de jugador y su mano de cartas
+    private Map<Integer, Jugador> jugadores;    //El numero de jugador y su mano de cartas
     private List<List<Carta>> combinaciones;    //Todas las combinaciones de cartas con los elementos de cartasRestantes
     private Controller controller;
-    public int numComb = 0;
 
     public Logic() {
         this.board = new SortedArrayList<>();
@@ -58,7 +57,7 @@ public class Logic {
         List<Carta> cartas = new SortedArrayList<>();
         cartas.addAll(mano);
 
-        Jugada jugada = null;
+        Jugada jugada;
 
         //Comprueba si se forma una de las siguientes jugadas
         if ((jugada = EscaleraColor(cartas)) != null) {
@@ -82,8 +81,43 @@ public class Logic {
         return new Jugada(cartas, tJugada.CARTA_ALTA);
     }
 
+    //Devuelve la lista de ids de los jugadores que puntuan 
+    public List<Integer> puntuaJugadores(Map<Integer, Jugada> jugadas) {
+        List<Integer> idJugadores = new ArrayList<>();
+
+        tJugada mejorJugada = null;
+
+        //Bucle para comprobar que jugador/es tienen la mejor jugador
+        for (Map.Entry<Integer, Jugada> entrada : jugadas.entrySet()) {
+            Integer id = entrada.getKey();
+            tJugada jugada = entrada.getValue().getJugada();
+
+            //Si la jugada actual es mejor que la mejorJugada
+            if (mejorJugada == null) {
+                idJugadores.add(id);
+                mejorJugada = jugada;
+            } else if (jugada.compareTo(mejorJugada) > 0) {
+                idJugadores.clear();
+                idJugadores.add(id);
+                mejorJugada = jugada;
+            } //Si es igual que la mejro jugada
+            else if (jugada.compareTo(mejorJugada) == 0) {
+                idJugadores.add(id);
+            }
+        }
+
+        //En caso de que varios jugadores tuvieran la misma jugada, ver quien/es ganan 
+        if (idJugadores.size() > 1) {
+            for (Integer id : idJugadores) {
+                //TODO
+            }
+        }
+
+        return idJugadores;
+    }
+
     //Calcular el equity para cada jugador segun el board
-    public void calcularEquityJugadores(int numCartasAleatorias) {
+    public void calcularPuntosJugadores(int numCartasAleatorias) {
         this.combinaciones.clear(); //Vaciar la lista de combinaciones 
         List<Carta> combinacionActual = new ArrayList<>();
 
@@ -96,9 +130,12 @@ public class Logic {
             //La lista de cartas, sumando las del board y las del jugador
             List<Carta> cartas = new SortedArrayList<>();
 
-            for (Map.Entry<Integer, List<Carta>> entrada : this.jugadores.entrySet()) {
+            //Mapa id jugador y la mejor jugada encontrada
+            Map<Integer, Jugada> jugadas = new HashMap<>();
+
+            for (Map.Entry<Integer, Jugador> entrada : this.jugadores.entrySet()) {
                 Integer numJugador = entrada.getKey();
-                List<Carta> manoJugador = entrada.getValue();
+                List<Carta> manoJugador = entrada.getValue().getCartas();
 
                 //Inserta todas las cartas del board de manera ordenada
                 cartas.addAll(combinacion);
@@ -107,11 +144,20 @@ public class Logic {
 
                 //Listo para ver si forma alguna jugada
                 Jugada jugada = evalue(cartas);
+                jugadas.put(numJugador, jugada);
 
-                //TODO 
-                
                 //Borrar las cartas de la mano del jugador
                 cartas.clear();
+            }
+
+            //Lista de jugadores que se hay que puntuar             
+            List<Integer> idJugadores = puntuaJugadores(jugadas);
+
+            double puntos = 1 / idJugadores.size();
+
+            //Sumar puntos a los jugadores
+            for(Integer id : idJugadores){
+                jugadores.get(id).sumaPuntos(puntos);
             }
         }
 
@@ -121,7 +167,7 @@ public class Logic {
     public void eliminarRep() {
         cartasRestantes.removeAll(board);
         for (int i = 0; i < 6; i++) {
-            cartasRestantes.removeAll(jugadores.get(i));
+            cartasRestantes.removeAll(jugadores.get(i).getCartas());
         }
     }
 
@@ -154,7 +200,7 @@ public class Logic {
         card.add(card2);
         cartasRestantes.remove(card1);
         cartasRestantes.remove(card2);
-        jugadores.put(jugador, card);
+        jugadores.put(jugador, new Jugador(card, jugador));
     }
 
     //Inicializar el board
@@ -177,12 +223,12 @@ public class Logic {
         Carta carta2 = getRandomCarta();
         c.add(carta2);
         cartasRestantes.remove(carta2);
-        jugadores.put(jugador, c);
+        jugadores.put(jugador, new Jugador(c, jugador));
     }
 
     //Devuelve las cartas de un jugador
     public List<Carta> getJugadorCarta(int jugador) {
-        return jugadores.get(jugador);
+        return jugadores.get(jugador).getCartas();
     }
 
     public void setController(Controller controller) {
