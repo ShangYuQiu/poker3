@@ -1,31 +1,36 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
 
-    private List<Carta> cartas;
     private int id;
-    private tJugada mejorJugada;
-    private double puntos;
+    private Jugada mejorJugada;    
+    private double puntos;  //Puntos para calcular equity
+    private List<Carta> manoInicial; 
+        
 
     public Jugador(List<Carta> c, int id) {
-        this.cartas = new ArrayList<>(c);
+        this.manoInicial = new SortedArrayList<>();
+        this.manoInicial.addAll(c);
         this.id = id;
-        puntos = 0;
+        this.puntos = 0;
     }
 
     public List<Carta> getCartas() {
-        return cartas;
+        return this.manoInicial;
     }
 
     public double getPuntos() {
-        return puntos;
+        return this.puntos;
+    }
+    
+    public Jugada getJugada(){
+        return this.mejorJugada;
     }
 
-    public tJugada getJugada() {
-        return mejorJugada;
+    public tJugada getTipoJugada() {
+        return this.mejorJugada.getJugada();
     }
     
     public void sumaPuntos(double d){
@@ -36,7 +41,7 @@ public class Jugador {
         this.puntos = d;
     }
 
-    public void setMejorJugada(tJugada t) {
-        this.mejorJugada = t;
+    public void setMejorJugada(Jugada j) {
+        this.mejorJugada = j;
     }
 }
