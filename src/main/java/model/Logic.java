@@ -30,7 +30,7 @@ public class Logic {
     }
 
     //Inicializa las 52 cartas
-    public void init() {
+    private void init() {
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 4; j++) {
                 Carta c = new Carta(simb[i], palos[j]);
@@ -315,22 +315,6 @@ public class Logic {
         return board;
     }
 
-
-    /*Métodos para calcular jugadas*/
-    //Comprobar que todas las cartas son del mismo palo 
-    private boolean esMismoPalo(List<Carta> c) {
-        boolean mismoPalo = true;
-        int i = 0;
-
-        while (i < c.size() - 1 && mismoPalo) {
-            if (!c.get(i).getPalo().equals(c.get(i + 1).getPalo())) {
-                mismoPalo = false;
-            }
-            i++;
-        }
-        return mismoPalo;
-    }
-
     private Jugada EscaleraColor(List<Carta> c) {
         Jugada escaleraColor = null;
 
@@ -364,7 +348,7 @@ public class Logic {
     }
 
     //Comprueba si hay escalera
-    public Jugada Escalera(List<Carta> c) {
+    public Jugada Escalera(List<Carta> c) {        
         Jugada escalera = null;
 
         int i = 0;
@@ -478,7 +462,6 @@ public class Logic {
     //Devuelve el mejor Flush (Funciona)
     private Jugada Flush(List<Carta> c) {
         Jugada flush = null;
-        Collections.sort(c);
 
         //Contador para cartas de cada palo
         int contH = 0;
@@ -531,9 +514,9 @@ public class Logic {
             //Lista auxiliar para almacenar valores del flush
             ArrayList<Carta> lista = new ArrayList<>();
 
-            //Recorrido en sentido inverso desde index
+            //Recorrido en sentido inverso desde index 
             for (int j = index; j >= 0; --j) {
-                if (c.get(j).getPalo().equals(palo)) {
+                if (c.get(j).getPalo().equals(palo)) {// mira el palo de flush
                     lista.add(c.get(j));
                 }
             }
@@ -581,7 +564,7 @@ public class Logic {
     //Devuelve la mejor doble pareja (Funciona)
     private Jugada DoblePareja(List<Carta> c) {
         Jugada doblePareja = null;
-        Collections.sort(c);
+
         List<Carta> aux = new ArrayList<>(c);
         List<Carta> aux2 = new ArrayList<>();
         boolean ok= false;
@@ -625,7 +608,6 @@ public class Logic {
     //Devuelve la mejor pareja (Funciona)
     private Jugada Pareja(List<Carta> c) {
         Jugada pareja = null;
-        Collections.sort(c);
 
         int i = 0;
         while (i < c.size() - 1) {
