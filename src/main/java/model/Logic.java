@@ -564,21 +564,43 @@ public class Logic {
     private Jugada DoblePareja(List<Carta> c) {
         Jugada doblePareja = null;
         Collections.sort(c);
+        List<Carta> aux = new ArrayList<>(c);
+        List<Carta> aux2 = new ArrayList<>();
+        boolean ok= false;
         //Se busca la primera pareja
-        if (Pareja(c) != null) {
-            //Los quitamos de la lista
-            Carta tmp = c.remove(0);
-            Carta tmp2 = c.remove(0);
-
-            //Si se encuentra una segunda pareja
-            if (Pareja(c) != null) {
-                //Se insertan la primera pareja en la mano
-                c.add(0, tmp2);
-                c.add(0, tmp);
-                //String msgJugada = String.format("%s with %s ", "Two pairs", getStrCartas());
-                doblePareja = new Jugada(c, tJugada.DOBLE_PAREJA);
+         int i = 0;
+        while (i < c.size() - 1) {
+            Carta cur = c.get(i);
+            Carta sig = c.get(i + 1);
+            if (cur.getVal() == sig.getVal()) {
+                // eliminamos la primera pareja
+                aux.remove(cur);
+                aux.remove(sig);
+                //Mete la pareja de carta al principio de la jugada               
+                aux2.add(cur);
+                aux2.add(sig);
+                ok = true;
+                break;
             }
+            i++;
         }
+        
+        int j = 0;
+        
+        while(j < aux.size()-1 && ok){
+            Carta cur = c.get(j);
+            Carta sig = c.get(j + 1); 
+            
+            if(cur.getVal() == sig.getVal()){
+                aux2.add(cur);
+                aux2.add(sig);
+                
+                doblePareja = new Jugada( aux2, tJugada.DOBLE_PAREJA);
+                break;
+            }
+            j++;
+        }
+        
         return doblePareja;
     }
 
@@ -589,13 +611,13 @@ public class Logic {
 
         int i = 0;
         while (i < c.size() - 1) {
-            int cur = c.get(i).getVal();
-            int sig = c.get(i + 1).getVal();
-            if (cur == sig) {
+            Carta cur = c.get(i);
+            Carta sig = c.get(i + 1);
+            if (cur.getVal() == sig.getVal()) {
                 //Mete la pareja de carta al principio de la jugada
                 List<Carta> aux = new ArrayList<>();
-                aux.add(c.get(cur));
-                aux.add(c.get(sig));
+                aux.add(cur);
+                aux.add(sig);
                 //Forma la cadena de la jugada, por ejemplo: "A pair of Ases with AhAh7h6c2d"
                 // String msgJugada = String.format("Pair of %s with %s", Evaluador.msg.get(cur - 2), getStrCartas());
                 pareja = new Jugada(aux, tJugada.PAREJA);
