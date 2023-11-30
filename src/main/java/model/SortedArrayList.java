@@ -35,7 +35,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        super.addAll(c);
+//        super.addAll(c);
         for (E e : c) {
             add(e);
         }
