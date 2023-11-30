@@ -1077,27 +1077,32 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonRandom1.setEnabled(true);
         jTextField1.setEnabled(true);
         jButtonEnter1.setEnabled(true);
-        
+        jLabelEquity1.setText("0,00%");
         //jugador2
         jButtonRandom2.setEnabled(true);
         jTextField2.setEnabled(true);
         jButtonEnter2.setEnabled(true);
+        jLabelEquity2.setText("0,00%");
         //jugador3
         jButtonRandom3.setEnabled(true);
         jTextField3.setEnabled(true);
         jButtonEnter3.setEnabled(true);
+        jLabelEquity3.setText("0,00%");
         //jugador4
         jButtonRandom4.setEnabled(true);
         jTextField4.setEnabled(true);
         jButtonEnter4.setEnabled(true);
+        jLabelEquity4.setText("0,00%");
         //jugador5
         jButtonRandom5.setEnabled(true);
         jTextField5.setEnabled(true);
         jButtonEnter5.setEnabled(true);
+        jLabelEquity5.setText("0,00%");
         //jugador6
         jButtonRandom6.setEnabled(true);
         jTextField6.setEnabled(true);
         jButtonEnter6.setEnabled(true);
+        jLabelEquity6.setText("0,00%");
         //board
         jButtonBoardRandom.setEnabled(true);
         jButtonEnterBoard.setEnabled(true);

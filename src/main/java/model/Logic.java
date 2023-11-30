@@ -215,13 +215,11 @@ public class Logic {
     //calcular equity para cada jugador
     public void calculateEquity(){
         int puntosTotales=0;
-        for(int i=0;i<6;i++){
-            //calcular puntuacon total
-            puntosTotales+=jugadores.get(i).getPuntos();
+        for (Integer jug: jugadores.keySet()) {
+             puntosTotales+=jugadores.get(jug).getPuntos();
         }
-        for(int i=0;i<6;i++){
-            //guardar los porcentajes de todos los jugadores
-            equity.put(i, (jugadores.get(i).getPuntos()/puntosTotales)*100);
+        for (Integer jug: jugadores.keySet()) {
+             equity.put(jug, (jugadores.get(jug).getPuntos()/puntosTotales)*100);
         }
     }
     //devolver todos los porcenttajes de todos los jugadores
