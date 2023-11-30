@@ -17,6 +17,7 @@ public class Logic {
     private List<Carta> cartasRestantes;    //Todas las cartas sin contar con las de las manos de los jugadores ni el del board
     private Map<Integer, Jugador> jugadores;    //El numero de jugador y su mano de cartas
     private List<List<Carta>> combinaciones;    //Todas las combinaciones de cartas con los elementos de cartasRestantes
+    private Map<Integer, Double> equity;
     private Controller controller;
 
     public Logic() {
@@ -24,6 +25,7 @@ public class Logic {
         this.jugadores = new HashMap<>();
         this.cartasRestantes = new ArrayList<>();
         this.combinaciones = new ArrayList<>();
+        this.equity=new HashMap<>();
         init();
     }
 
@@ -116,7 +118,7 @@ public class Logic {
     //Devuelve la lista de ids de los jugadores que puntuan 
     public List<Integer> puntuaJugadores(Map<Integer, Jugada> jugadas) {
         List<Integer> idJugadores = new ArrayList<>();
-
+        List<Integer> idJug = new ArrayList<>();
         tJugada mejorJugada = null;
 
         //Bucle para comprobar que jugador/es tienen la mejor jugador
@@ -127,22 +129,24 @@ public class Logic {
             //Si la jugada actual es mejor que la mejorJugada
             if (mejorJugada == null) {
                 idJugadores.add(idJugador);
+                idJug.add(idJugador);
                 mejorJugada = jugada;
             } else if (jugada.compareTo(mejorJugada) > 0) {
                 idJugadores.clear();
                 idJugadores.add(idJugador);
+                idJug.add(idJugador);
                 mejorJugada = jugada;
             } //Si es igual que la mejor jugada
             else if (jugada.compareTo(mejorJugada) == 0) {
                 idJugadores.add(idJugador);
+                idJug.add(idJugador);
             }
         }
 
         //En caso de que varios jugadores tuvieran la misma jugada, ver quien/es ganan 
         Jugada jugadaActual = null;
-
-        if (idJugadores.size() > 1) {
-            for (Integer id : idJugadores) {
+        if (idJug.size() > 1) {
+            for (int id : idJug) {
                 Jugada jugada = jugadores.get(id).getJugada();
 
                 if (jugadaActual == null) {
@@ -200,8 +204,7 @@ public class Logic {
             //Lista de jugadores que se hay que puntuar             
             List<Integer> idJugadores = puntuaJugadores(jugadas);
 
-            double puntos = 1 / idJugadores.size();
-
+            double puntos = 1.00 / idJugadores.size();
             //Sumar puntos a los jugadores
             for (Integer id : idJugadores) {
                 jugadores.get(id).sumaPuntos(puntos);
@@ -209,7 +212,24 @@ public class Logic {
         }
 
     }
-
+    //calcular equity para cada jugador
+    public void calculateEquity(){
+        int puntosTotales=0;
+        for(int i=0;i<6;i++){
+            //calcular puntuacon total
+            puntosTotales+=jugadores.get(i).getPuntos();
+        }
+        for(int i=0;i<6;i++){
+            //guardar los porcentajes de todos los jugadores
+            equity.put(i, (jugadores.get(i).getPuntos()/puntosTotales)*100);
+        }
+    }
+    //devolver todos los porcenttajes de todos los jugadores
+    public Map<Integer,Double> getEquity(){
+        calculateEquity();
+        return equity;
+    }
+    
     //Elimina las cartas duplicadas 
     public void eliminarRep() {
         //Eliminar cartas que ya han aparecido en el board del total de cartas
@@ -269,10 +289,10 @@ public class Logic {
         List<Carta> c = new ArrayList<>();
         Carta carta1 = getRandomCarta();
         c.add(carta1);
-        cartasRestantes.remove(carta1);
+        this.cartasRestantes.remove(carta1);
         Carta carta2 = getRandomCarta();
         c.add(carta2);
-        cartasRestantes.remove(carta2);
+        this.cartasRestantes.remove(carta2);
         jugadores.put(jugador, new Jugador(c, jugador));
     }
 
@@ -284,8 +304,8 @@ public class Logic {
     }
 
     //Devuelve las cartas de un jugador
-    public List<Carta> getJugadorCarta(int jugador) {
-        return jugadores.get(jugador).getCartas();
+    public List<Carta> getJugadorCarta(int jug) {
+        return jugadores.get(jug).getCartas();
     }
 
     public void setController(Controller controller) {
