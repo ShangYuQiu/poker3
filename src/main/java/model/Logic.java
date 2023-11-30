@@ -30,7 +30,7 @@ public class Logic {
     }
 
     //Inicializa las 52 cartas
-    public void init() {
+    private void init() {
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 4; j++) {
                 Carta c = new Carta(simb[i], palos[j]);
@@ -514,9 +514,9 @@ public class Logic {
             //Lista auxiliar para almacenar valores del flush
             ArrayList<Carta> lista = new ArrayList<>();
 
-            //Recorrido en sentido inverso desde index
+            //Recorrido en sentido inverso desde index 
             for (int j = index; j >= 0; --j) {
-                if (c.get(j).getPalo().equals(palo)) {
+                if (c.get(j).getPalo().equals(palo)) {// mira el palo de flush
                     lista.add(c.get(j));
                 }
             }
