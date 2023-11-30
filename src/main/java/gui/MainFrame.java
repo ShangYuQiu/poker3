@@ -936,7 +936,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonEnter4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnter4ActionPerformed
         // TODO add your handling code here:
-        controller.enterJugCard(3, jTextField3.getText());
+        controller.enterJugCard(3, jTextField4.getText());
         Carta carta1=this.controller.getJugadorCarta(3).get(0);
         Carta carta2=this.controller.getJugadorCarta(3).get(1);
         ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
