@@ -317,22 +317,6 @@ public class Logic {
         return board;
     }
 
-
-    /*Métodos para calcular jugadas*/
-    //Comprobar que todas las cartas son del mismo palo 
-    private boolean esMismoPalo(List<Carta> c) {
-        boolean mismoPalo = true;
-        int i = 0;
-
-        while (i < c.size() - 1 && mismoPalo) {
-            if (!c.get(i).getPalo().equals(c.get(i + 1).getPalo())) {
-                mismoPalo = false;
-            }
-            i++;
-        }
-        return mismoPalo;
-    }
-
     private Jugada EscaleraColor(List<Carta> c) {
         Jugada escaleraColor = null;
 
@@ -366,7 +350,7 @@ public class Logic {
     }
 
     //Comprueba si hay escalera
-    public Jugada Escalera(List<Carta> c) {
+    public Jugada Escalera(List<Carta> c) {        
         Jugada escalera = null;
 
         int i = 0;
@@ -480,7 +464,6 @@ public class Logic {
     //Devuelve el mejor Flush (Funciona)
     private Jugada Flush(List<Carta> c) {
         Jugada flush = null;
-        Collections.sort(c);
 
         //Contador para cartas de cada palo
         int contH = 0;
@@ -583,7 +566,7 @@ public class Logic {
     //Devuelve la mejor doble pareja (Funciona)
     private Jugada DoblePareja(List<Carta> c) {
         Jugada doblePareja = null;
-        Collections.sort(c);
+
         List<Carta> aux = new ArrayList<>(c);
         List<Carta> aux2 = new ArrayList<>();
         boolean ok= false;
@@ -627,7 +610,6 @@ public class Logic {
     //Devuelve la mejor pareja (Funciona)
     private Jugada Pareja(List<Carta> c) {
         Jugada pareja = null;
-        Collections.sort(c);
 
         int i = 0;
         while (i < c.size() - 1) {
