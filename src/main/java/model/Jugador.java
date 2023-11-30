@@ -12,7 +12,7 @@ public class Jugador {
 
     public Jugador(List<Carta> c, int id) {
         this.manoInicial = new SortedArrayList<>();
-        this.manoInicial.addAll(c);
+        this.manoInicial=c;
         this.id = id;
         this.puntos = 0;
     }

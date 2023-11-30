@@ -3,6 +3,7 @@ package controller;
 import gui.MainFrame;
 import java.util.List;
 import model.*;
+import java.util.Map;
 
 public class Controller {
 
@@ -22,7 +23,6 @@ public class Controller {
 
     //devuelve cartas del jugador elegido
     public List<Carta> getJugadorCarta(int jug) {
-
         return logica.getJugadorCarta(jug);
     }
 
@@ -49,5 +49,10 @@ public class Controller {
     public void setLogica() {
         this.logica = new Logic();
     }
-
+    public Map<Integer,Double> getEquity(){
+        return this.logica.getEquity();
+    }
+    public void calcularPuntosJugadores(int numCartasAleatorias){
+        this.logica.calcularPuntosJugadores(numCartasAleatorias);
+    }
 }
