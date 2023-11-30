@@ -1107,7 +1107,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalculateActionPerformed
         // TODO add your handling code here:
         controller.calcularPuntosJugadores(5-controller.getBoardCard().size());
-        jLabelEquity1.setText(String.format("%.3f",controller.getEquity().get(1))+"%");
+        jLabelEquity1.setText(String.format("%.3f",controller.getEquity().get(0))+"%");
         jLabelEquity2.setText(String.format("%.3f",controller.getEquity().get(1))+"%");
         jLabelEquity3.setText(String.format("%.3f",controller.getEquity().get(2))+"%");
         jLabelEquity4.setText(String.format("%.3f",controller.getEquity().get(3))+"%");
