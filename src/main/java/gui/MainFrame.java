@@ -970,7 +970,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonEnter5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnter5ActionPerformed
         // TODO add your handling code here:
-        controller.enterJugCard(4, jTextField3.getText());
+        controller.enterJugCard(4, jTextField5.getText());
         Carta carta1=this.controller.getJugadorCarta(4).get(0);
         Carta carta2=this.controller.getJugadorCarta(4).get(1);
         ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
@@ -1004,7 +1004,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonEnter6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnter6ActionPerformed
         // TODO add your handling code here:
-        controller.enterJugCard(5, jTextField3.getText());
+        controller.enterJugCard(5, jTextField6.getText());
         Carta carta1=this.controller.getJugadorCarta(5).get(0);
         Carta carta2=this.controller.getJugadorCarta(5).get(1);
         ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
