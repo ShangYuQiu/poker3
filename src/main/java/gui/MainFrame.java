@@ -1041,9 +1041,11 @@ public class MainFrame extends javax.swing.JFrame {
             jLabelboards[i].setIcon(resizeImage(icon1.getImage(),64,79));
             i++;
         }
-        jButtonBoardRandom.setEnabled(false);
-        jTextFieldBoard.setEnabled(false);
-        jButtonEnterBoard.setEnabled(false);
+        if(cartas.size()==5){
+            jButtonBoardRandom.setEnabled(false);
+            jButtonEnterBoard.setEnabled(false);
+            jTextFieldBoard.setEnabled(false);
+        }
     }//GEN-LAST:event_jButtonBoardEnterActionPerformed
 
     private void jButtonBoardRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBoardRandomActionPerformed
@@ -1064,9 +1066,9 @@ public class MainFrame extends javax.swing.JFrame {
         }
         if(cartas.size()==5){
             jButtonBoardRandom.setEnabled(false);
+            jButtonEnterBoard.setEnabled(false);
+            jTextFieldBoard.setEnabled(false);
         }
-        jButtonEnterBoard.setEnabled(false);
-        jTextFieldBoard.setEnabled(false);
     }//GEN-LAST:event_jButtonBoardRandomActionPerformed
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
