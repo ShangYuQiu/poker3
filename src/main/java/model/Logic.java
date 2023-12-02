@@ -2,7 +2,6 @@ package model;
 
 import controller.Controller;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -14,10 +13,10 @@ public class Logic {
     private final static String palos[] = {"h", "d", "s", "c"};
 
     private List<Carta> board;  //Cartas del board
-    private List<Carta> cartasRestantes;    //Todas las cartas sin contar con las de las manos de los jugadores ni el del board
-    private Map<Integer, Jugador> jugadores;    //El numero de jugador y su mano de cartas
+    private List<Carta> cartasRestantes;    //Todas las cartas sin contar con la mano de los jugadores ni las cartas presentes en el board
+    private Map<Integer, Jugador> jugadores;    //Par id jugador y el jugador corrspondiente
     private List<List<Carta>> combinaciones;    //Todas las combinaciones de cartas con los elementos de cartasRestantes
-    private Map<Integer, Double> equity;
+    private Map<Integer, Double> equity;    //Par id jugador y el equity asociado 
     private Controller controller;
 
     public Logic() {
@@ -25,7 +24,7 @@ public class Logic {
         this.jugadores = new HashMap<>();
         this.cartasRestantes = new ArrayList<>();
         this.combinaciones = new ArrayList<>();
-        this.equity=new HashMap<>();
+        this.equity = new HashMap<>();
         init();
     }
 
@@ -117,8 +116,8 @@ public class Logic {
 
     //Devuelve la lista de ids de los jugadores que puntuan 
     public List<Integer> puntuaJugadores(Map<Integer, Jugada> jugadas) {
-        List<Integer> idJugadores = new ArrayList<>();
-        List<Integer> idJug = new ArrayList<>();
+        List<Integer> idJugadores = new ArrayList<>(); //Lista de ids a devolver
+        List<Integer> aux = new ArrayList<>();  //Lista auxiliar para calcular los ids
         tJugada mejorJugada = null;
 
         //Bucle para comprobar que jugador/es tienen la mejor jugador
@@ -128,37 +127,32 @@ public class Logic {
 
             //Si la jugada actual es mejor que la mejorJugada
             if (mejorJugada == null) {
-                idJugadores.add(idJugador);
-                idJug.add(idJugador);
+                aux.add(idJugador);
                 mejorJugada = jugada;
             } else if (jugada.compareTo(mejorJugada) > 0) {
-                idJugadores.clear();
-                idJugadores.add(idJugador);
-                idJug.add(idJugador);
+                aux.clear();
+                aux.add(idJugador);
                 mejorJugada = jugada;
             } //Si es igual que la mejor jugada
             else if (jugada.compareTo(mejorJugada) == 0) {
-                idJugadores.add(idJugador);
-                idJug.add(idJugador);
+                aux.add(idJugador);
             }
         }
 
         //En caso de que varios jugadores tuvieran la misma jugada, ver quien/es ganan 
         Jugada jugadaActual = null;
-        if (idJug.size() > 1) {
-            for (int id : idJug) {
+        if (aux.size() > 1) {
+            for (int id : aux) {
                 Jugada jugada = jugadores.get(id).getJugada();
 
                 if (jugadaActual == null) {
                     jugadaActual = jugada;
                     idJugadores.add(id);
-                }
-                else if(esMejorJugada(jugada, jugadaActual)){
+                } else if (esMejorJugada(jugada, jugadaActual)) {
                     idJugadores.clear();
                     jugadaActual = jugada;
                     idJugadores.add(id);
-                }
-                else if(esIgualJugada(jugada, jugadaActual)){
+                } else if (esIgualJugada(jugada, jugadaActual)) {
                     idJugadores.add(id);
                 }
             }
@@ -212,22 +206,24 @@ public class Logic {
         }
 
     }
+
     //calcular equity para cada jugador
-    public void calculateEquity(){
-        int puntosTotales=0;
-        for (Integer jug: jugadores.keySet()) {
-             puntosTotales+=jugadores.get(jug).getPuntos();
+    public void calculateEquity() {
+        int puntosTotales = 0;
+        for (Integer jug : jugadores.keySet()) {
+            puntosTotales += jugadores.get(jug).getPuntos();
         }
-        for (Integer jug: jugadores.keySet()) {
-             equity.put(jug, (jugadores.get(jug).getPuntos()/puntosTotales)*100);
+        for (Integer jug : jugadores.keySet()) {
+            this.equity.put(jug, (jugadores.get(jug).getPuntos() / puntosTotales) * 100);
         }
     }
+
     //devolver todos los porcenttajes de todos los jugadores
-    public Map<Integer,Double> getEquity(){
+    public Map<Integer, Double> getEquity() {
         calculateEquity();
-        return equity;
+        return this.equity;
     }
-    
+
     //Elimina las cartas duplicadas 
     public void eliminarRep() {
         //Eliminar cartas que ya han aparecido en el board del total de cartas
@@ -242,18 +238,19 @@ public class Logic {
     //Introducir carta al board
     public void addBoard(Carta c) {
         this.board.add(c);
+        this.cartasRestantes.remove(c);
     }
 
     //Quitar una carta del board
     public void removeBoard(Carta c) {
         this.board.remove(c);
+        this.cartasRestantes.add(c);
     }
 
     //Devuelve una carta aleatorio que no ha salido todavia
     public Carta getRandomCarta() {
         Random rand = new Random();
         int indRandom = rand.nextInt(cartasRestantes.size());
-
         Carta c = cartasRestantes.get(indRandom);
         return c;
     }
@@ -323,24 +320,25 @@ public class Logic {
             ArrayList<Carta> tmp = new ArrayList<>(); //Lista que guarda las carta forma la escalera de color
             tmp.add(c.get(i));  //Inserta la primera carta a partir de la cual empieza la busqueda
             String palo = c.get(i).getPalo();   //El palo que se busca         
-            int cur = c.get(i).getVal();    //Valor de la ultima carta que se tiene para formar la jugada
+            int cur = c.get(i).getVal();    //La carta sobre la que se empieza la busqueda
 
             int j = i + 1;
             while (j < c.size()) {
                 //Si es del mismo valo y su diferencia vale 1
                 if (cur - c.get(j).getVal() == 1 && palo.equals(c.get(j).getPalo())) {
-                    tmp.add(0, c.get(j));   //Se inserta en la lista
+                    tmp.add(c.get(j));   //Se inserta en la lista
                     cur = c.get(j).getVal();    //Se actualiza el ultimo valor
                 }
+
+                //Si la jugada llega a tener 5 cartas => Escalera Color
+                if (tmp.size() == 5) {
+                    escaleraColor = new Jugada(tmp, tJugada.ESCALERA_COLOR);
+                    return escaleraColor;
+                }
+
                 ++j;
             }
 
-            //Si la jugada llega a tener 5 cartas => Escalera Color
-            if (tmp.size() == 5) {
-                //String msgJugada = String.format("Straight Flush with %s", getStrCartas());
-                escaleraColor = new Jugada(tmp, tJugada.ESCALERA_COLOR);
-                break;
-            }
             ++i;
         }
 
@@ -348,7 +346,7 @@ public class Logic {
     }
 
     //Comprueba si hay escalera
-    public Jugada Escalera(List<Carta> c) {        
+    public Jugada Escalera(List<Carta> c) {
         Jugada escalera = null;
 
         int i = 0;
@@ -364,17 +362,16 @@ public class Logic {
                     tmp.add(c.get(j));   //Se inserta en la lista
                     cur = c.get(j).getVal();    //Se actualiza el ultimo valor
                 }
+
+                //Si la jugada llega a tener 5 cartas => Escalera 
+                if (tmp.size() == 5) {
+                    escalera = new Jugada(tmp, tJugada.ESCALERA);
+                    return escalera;
+                }
+
                 ++j;
             }
 
-            //Si la jugada llega a tener 5 cartas => Escalera 
-            if (tmp.size() >= 5) {
-                //tmp.removeAll(this.board);
-                if (!tmp.isEmpty()) {
-                    escalera = new Jugada(tmp, tJugada.ESCALERA);
-                    break;
-                }
-            }
             ++i;
         }
 
@@ -392,20 +389,25 @@ public class Logic {
             Carta cur = c.get(i);    //Valor de la ultima carta que se tiene para formar la jugada
 
             int j = i + 1;
+            Carta kicker = null;
             while (j < c.size()) {
                 //Si las 2 cartas es tienen el mismo valor
                 if (cur.getSimb().equals(c.get(j).getSimb())) {
                     tmp.add(c.get(j));   //Se inserta en la lista
                 }
+
+                //Si la jugada llega a tener 4 cartas iguales => quad
+                if (tmp.size() == 4) {
+                    List<Carta> tmp2 = new ArrayList<>(c);
+                    tmp2.removeAll(tmp);
+                    tmp.add(tmp2.get(0));
+                    poker = new Jugada(tmp, tJugada.POKER);
+                    return poker;
+                }
+
                 ++j;
             }
-            //Si la jugada llega a tener al menos 4 cartas => quad
-            if (tmp.size() >= 4) {
-                if (!tmp.isEmpty()) {
-                    poker = new Jugada(tmp, tJugada.POKER);
-                    break;
-                }
-            }
+
             ++i;
         }
 
@@ -472,7 +474,6 @@ public class Logic {
         String palo = null; //El palo que primero consigue sus 5 cartas
 
         int i = 0;
-        int index = c.size() - 1; //Indice hasta la cual ya hay 5 cartas del mismo palo
 
         while (i < c.size()) {
             //Contamos los palos
@@ -490,86 +491,92 @@ public class Logic {
             //Identifica que palo tiene ya sus 5 cartas
             if (contH == 5) {
                 palo = "h";
-                index = i;
                 break;
             } else if (contD == 5) {
                 palo = "d";
-                index = i;
                 break;
             } else if (contC == 5) {
                 palo = "c";
-                index = i;
                 break;
             } else if (contS == 5) {
                 palo = "s";
-                index = i;
                 break;
             }
             i++;
 
         }
 
-        //Si hay flush
-        if (contH > 4 || contD > 4 || contC > 4 || contS > 4) {
+        //Comprobar si hay flush
+        if (contH == 5 || contD == 5 || contC == 5 || contS == 5) {
             //Lista auxiliar para almacenar valores del flush
             ArrayList<Carta> lista = new ArrayList<>();
 
-            //Recorrido en sentido inverso desde index 
-            for (int j = index; j >= 0; --j) {
-                if (c.get(j).getPalo().equals(palo)) {// mira el palo de flush
-                    lista.add(c.get(j));
+            for (Carta carta : c) {
+                if (carta.getPalo().equals(palo)) {
+                    lista.add(carta);
+                }
+
+                if (lista.size() == 5) {
+                    flush = new Jugada(lista, tJugada.COLOR);
+                    return flush;
                 }
             }
 
-            flush = new Jugada(lista, tJugada.COLOR);
         }
 
         return flush;
     }
 
-    //Comprueba si hay trio
-    public Jugada Trio(List<Carta> c) { // return lista 
+    //Devuelve el mejor trio si la hay
+    public Jugada Trio(List<Carta> c) {
         Jugada trio = null;
+
         int i = 0;
-        int cont = 1;   //Numero de cartas del trio actual
-        List<Carta> trios = new ArrayList<>();
-
-        while (i < c.size() - 1) {
+        while (i < c.size()) {
+            List<Carta> tmp = new ArrayList<>();
             int cur = c.get(i).getVal();
-            int sig = c.get(i + 1).getVal();
+            tmp.add(c.get(i));
 
-            //Contamos si la actual es igual a la siguiente
-            if (cur == sig) {
-                cont++;
-            } //Contamos de nuevo
-            else {
-                cont = 1;
+            int j = i + 1;
+            while (j < c.size()) {
+
+                int sig = c.get(j).getVal();
+
+                if (cur == sig) {
+                    tmp.add(c.get(j));
+                }
+
+                //Si ya hay 3 cartas iguales
+                if (tmp.size() == 3) {
+                    List<Carta> tmp2 = new ArrayList<>(c);
+                    tmp2.removeAll(tmp);
+                    tmp.add(tmp2.get(0));
+                    tmp.add(tmp2.get(1));
+                    trio = new Jugada(tmp, tJugada.TRIO);
+                    return trio;
+
+                }
+
+                ++j;
             }
-            //Si hay posibilidad de trio
-            if (cont == 3) {
-                //Almacenamos las cartas que forman el trio
-                trios.add(c.get(i - 1));
-                trios.add(c.get(i));
-                trios.add(c.get(i + 1));
-                //quitamos de la lista de trios las cartas de board
-                trio = new Jugada(trios, tJugada.TRIO);
-                break;
-            }
-            i++;
+
+            ++i;
         }
+
         return trio;
     }
 
-    // to do
+
     //Devuelve la mejor doble pareja (Funciona)
     private Jugada DoblePareja(List<Carta> c) {
         Jugada doblePareja = null;
 
         List<Carta> aux = new ArrayList<>(c);
         List<Carta> aux2 = new ArrayList<>();
-        boolean ok= false;
+        boolean ok = false;
+        
         //Se busca la primera pareja
-         int i = 0;
+        int i = 0;
         while (i < c.size() - 1) {
             Carta cur = c.get(i);
             Carta sig = c.get(i + 1);
@@ -585,23 +592,28 @@ public class Logic {
             }
             i++;
         }
-        
+
         int j = 0;
-        
-        while(j < aux.size()-1 && ok){
+
+        while (j < aux.size() - 1 && ok) {
             Carta cur = c.get(j);
-            Carta sig = c.get(j + 1); 
-            
-            if(cur.getVal() == sig.getVal()){
+            Carta sig = c.get(j + 1);
+
+            if (cur.getVal() == sig.getVal()) {
+                
+                aux.remove(cur);
+                aux.remove(sig);
+                
                 aux2.add(cur);
                 aux2.add(sig);
-                
-                doblePareja = new Jugada( aux2, tJugada.DOBLE_PAREJA);
+                aux2.add(aux.get(0)); //El kicker
+
+                doblePareja = new Jugada(aux2, tJugada.DOBLE_PAREJA);
                 break;
             }
             j++;
         }
-        
+
         return doblePareja;
     }
 
@@ -615,12 +627,21 @@ public class Logic {
             Carta sig = c.get(i + 1);
             if (cur.getVal() == sig.getVal()) {
                 //Mete la pareja de carta al principio de la jugada
-                List<Carta> aux = new ArrayList<>();
-                aux.add(cur);
-                aux.add(sig);
-                //Forma la cadena de la jugada, por ejemplo: "A pair of Ases with AhAh7h6c2d"
-                // String msgJugada = String.format("Pair of %s with %s", Evaluador.msg.get(cur - 2), getStrCartas());
-                pareja = new Jugada(aux, tJugada.PAREJA);
+                List<Carta> aux = new ArrayList<>(c);
+                List<Carta> aux2 = new ArrayList<>();
+                aux.remove(cur);
+                aux.remove(sig);
+                
+                //La pareja
+                aux2.add(cur);
+                aux2.add(sig);
+                //Los kickers
+                aux2.add(aux.get(0));
+                aux2.add(aux.get(1));
+                aux2.add(aux.get(2));
+                
+                
+                pareja = new Jugada(aux2, tJugada.PAREJA);
                 break;
             }
             i++;

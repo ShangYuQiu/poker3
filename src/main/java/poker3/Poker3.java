@@ -2,9 +2,7 @@ package poker3;
 
 import controller.Controller;
 import gui.MainFrame;
-import java.util.ArrayList;
-import java.util.List;
-import model.*;
+import model.Logic;
 
 public class Poker3 {
 

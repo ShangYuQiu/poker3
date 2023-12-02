@@ -1,45 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package gui;
 
 import controller.Controller;
-import controller.Controller;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
-import javax.swing.SwingConstants;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.Image;
 import model.*;
 import javax.swing.ImageIcon;
-/**
- *
- * @author xinxi
- */
+
 public class MainFrame extends javax.swing.JFrame {
+
     private Controller controller;
-    /**
-     * Creates new form MainFrame
-     */
+
     public MainFrame() {
         initComponents();
         init();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -796,35 +772,35 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void init(){
+    private void init() {
         ImageIcon icon = new ImageIcon("img/back.png");
-        jLabelJ1C1.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ1C2.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ2C1.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ2C2.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ3C1.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ3C2.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ4C1.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ4C2.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ5C1.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ5C2.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ6C1.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelJ6C2.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelBoardC1.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelBoardC2.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelBoardC3.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelBoardC4.setIcon(resizeImage(icon.getImage(),64,79));
-        jLabelBoardC5.setIcon(resizeImage(icon.getImage(),64,79));
+        jLabelJ1C1.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ1C2.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ2C1.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ2C2.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ3C1.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ3C2.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ4C1.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ4C2.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ5C1.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ5C2.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ6C1.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelJ6C2.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelBoardC1.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelBoardC2.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelBoardC3.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelBoardC4.setIcon(resizeImage(icon.getImage(), 64, 79));
+        jLabelBoardC5.setIcon(resizeImage(icon.getImage(), 64, 79));
     }
     private void jButtonRandom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRandom1ActionPerformed
         // TODO add your handling code here:
         this.controller.randomJugCard(0);
-        List<Carta> carta=this.controller.getJugadorCarta(0);
-        ImageIcon icon1 = new ImageIcon("img/"+carta.get(0).toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta.get(1).toString()+".png");
+        List<Carta> carta = this.controller.getJugadorCarta(0);
+        ImageIcon icon1 = new ImageIcon("img/" + carta.get(0).toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta.get(1).toString() + ".png");
 
-        jLabelJ1C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ1C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ1C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ1C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom1.setEnabled(false);
         jTextField1.setEnabled(false);
         jButtonEnter1.setEnabled(false);
@@ -833,17 +809,17 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonEnter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnter1ActionPerformed
         // TODO add your handling code here:
         controller.enterJugCard(0, jTextField1.getText());
-        Carta carta1=this.controller.getJugadorCarta(0).get(0);
-        Carta carta2=this.controller.getJugadorCarta(0).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(0).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(0).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ1C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ1C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ1C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ1C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom1.setEnabled(false);
         jTextField1.setEnabled(false);
         jButtonEnter1.setEnabled(false);
-        
+
     }//GEN-LAST:event_jButtonEnter1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -853,13 +829,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRandom2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRandom2ActionPerformed
         // TODO add your handling code here:
         this.controller.randomJugCard(1);
-        Carta carta1=this.controller.getJugadorCarta(1).get(0);
-        Carta carta2=this.controller.getJugadorCarta(1).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(1).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(1).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ2C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ2C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ2C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ2C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom2.setEnabled(false);
         jTextField2.setEnabled(false);
         jButtonEnter2.setEnabled(false);
@@ -868,13 +844,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonEnter2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnter2ActionPerformed
         // TODO add your handling code here:
         controller.enterJugCard(1, jTextField2.getText());
-        Carta carta1=this.controller.getJugadorCarta(1).get(0);
-        Carta carta2=this.controller.getJugadorCarta(1).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(1).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(1).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ2C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ2C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ2C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ2C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom2.setEnabled(false);
         jTextField2.setEnabled(false);
         jButtonEnter2.setEnabled(false);
@@ -887,13 +863,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRandom3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRandom3ActionPerformed
         // TODO add your handling code here:
         this.controller.randomJugCard(2);
-        Carta carta1=this.controller.getJugadorCarta(2).get(0);
-        Carta carta2=this.controller.getJugadorCarta(2).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(2).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(2).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ3C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ3C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ3C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ3C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom3.setEnabled(false);
         jTextField3.setEnabled(false);
         jButtonEnter3.setEnabled(false);
@@ -902,13 +878,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonEnter3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnter3ActionPerformed
         // TODO add your handling code here:
         controller.enterJugCard(2, jTextField3.getText());
-        Carta carta1=this.controller.getJugadorCarta(2).get(0);
-        Carta carta2=this.controller.getJugadorCarta(2).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(2).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(2).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ3C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ3C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ3C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ3C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom3.setEnabled(false);
         jTextField3.setEnabled(false);
         jButtonEnter3.setEnabled(false);
@@ -916,19 +892,19 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButtonRandom4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRandom4ActionPerformed
         // TODO add your handling code here:
         this.controller.randomJugCard(3);
-        Carta carta1=this.controller.getJugadorCarta(3).get(0);
-        Carta carta2=this.controller.getJugadorCarta(3).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(3).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(3).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ4C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ4C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ4C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ4C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom4.setEnabled(false);
         jTextField4.setEnabled(false);
         jButtonEnter4.setEnabled(false);
@@ -937,13 +913,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonEnter4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnter4ActionPerformed
         // TODO add your handling code here:
         controller.enterJugCard(3, jTextField4.getText());
-        Carta carta1=this.controller.getJugadorCarta(3).get(0);
-        Carta carta2=this.controller.getJugadorCarta(3).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(3).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(3).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ4C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ4C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ4C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ4C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom4.setEnabled(false);
         jTextField4.setEnabled(false);
         jButtonEnter4.setEnabled(false);
@@ -956,13 +932,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRandom5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRandom5ActionPerformed
         // TODO add your handling code here:
         this.controller.randomJugCard(4);
-        Carta carta1=this.controller.getJugadorCarta(4).get(0);
-        Carta carta2=this.controller.getJugadorCarta(4).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(4).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(4).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ5C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ5C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ5C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ5C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom5.setEnabled(false);
         jTextField5.setEnabled(false);
         jButtonEnter5.setEnabled(false);
@@ -971,13 +947,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonEnter5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnter5ActionPerformed
         // TODO add your handling code here:
         controller.enterJugCard(4, jTextField5.getText());
-        Carta carta1=this.controller.getJugadorCarta(4).get(0);
-        Carta carta2=this.controller.getJugadorCarta(4).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(4).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(4).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ5C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ5C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ5C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ5C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom5.setEnabled(false);
         jTextField5.setEnabled(false);
         jButtonEnter5.setEnabled(false);
@@ -990,13 +966,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonRandom6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRandom6ActionPerformed
         // TODO add your handling code here:
         this.controller.randomJugCard(5);
-        Carta carta1=this.controller.getJugadorCarta(5).get(0);
-        Carta carta2=this.controller.getJugadorCarta(5).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(5).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(5).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ6C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ6C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ6C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ6C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom6.setEnabled(false);
         jTextField6.setEnabled(false);
         jButtonEnter6.setEnabled(false);
@@ -1005,13 +981,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonEnter6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnter6ActionPerformed
         // TODO add your handling code here:
         controller.enterJugCard(5, jTextField6.getText());
-        Carta carta1=this.controller.getJugadorCarta(5).get(0);
-        Carta carta2=this.controller.getJugadorCarta(5).get(1);
-        ImageIcon icon1 = new ImageIcon("img/"+carta1.toString()+".png");
-        ImageIcon icon2 = new ImageIcon("img/"+carta2.toString()+".png");
+        Carta carta1 = this.controller.getJugadorCarta(5).get(0);
+        Carta carta2 = this.controller.getJugadorCarta(5).get(1);
+        ImageIcon icon1 = new ImageIcon("img/" + carta1.toString() + ".png");
+        ImageIcon icon2 = new ImageIcon("img/" + carta2.toString() + ".png");
 
-        jLabelJ6C1.setIcon(resizeImage(icon1.getImage(),64,79));
-        jLabelJ6C2.setIcon(resizeImage(icon2.getImage(),64,79));
+        jLabelJ6C1.setIcon(resizeImage(icon1.getImage(), 64, 79));
+        jLabelJ6C2.setIcon(resizeImage(icon2.getImage(), 64, 79));
         jButtonRandom6.setEnabled(false);
         jTextField6.setEnabled(false);
         jButtonEnter6.setEnabled(false);
@@ -1028,20 +1004,20 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonBoardEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBoardEnterActionPerformed
         // TODO add your handling code here:
         controller.enterBoardCard(jTextFieldBoard.getText());
-        List<Carta> cartas=controller.getBoardCard();
-        JLabel jLabelboards[]= new JLabel[5];
-            jLabelboards[0]=jLabelBoardC1;
-            jLabelboards[1]=jLabelBoardC2;
-            jLabelboards[2]=jLabelBoardC3;
-            jLabelboards[3]=jLabelBoardC4;
-            jLabelboards[4]=jLabelBoardC5;
-           int i=0;
-        for(Carta c: cartas){
-            ImageIcon icon1 = new ImageIcon("img/"+c.toString()+".png");
-            jLabelboards[i].setIcon(resizeImage(icon1.getImage(),64,79));
+        List<Carta> cartas = controller.getBoardCard();
+        JLabel jLabelboards[] = new JLabel[5];
+        jLabelboards[0] = jLabelBoardC1;
+        jLabelboards[1] = jLabelBoardC2;
+        jLabelboards[2] = jLabelBoardC3;
+        jLabelboards[3] = jLabelBoardC4;
+        jLabelboards[4] = jLabelBoardC5;
+        int i = 0;
+        for (Carta c : cartas) {
+            ImageIcon icon1 = new ImageIcon("img/" + c.toString() + ".png");
+            jLabelboards[i].setIcon(resizeImage(icon1.getImage(), 64, 79));
             i++;
         }
-        if(cartas.size()==5){
+        if (cartas.size() == 5) {
             jButtonBoardRandom.setEnabled(false);
             jButtonEnterBoard.setEnabled(false);
             jTextFieldBoard.setEnabled(false);
@@ -1051,20 +1027,20 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonBoardRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBoardRandomActionPerformed
         // TODO add your handling code here:
         controller.randomBoardCard();
-        List<Carta> cartas=controller.getBoardCard();
-        JLabel jLabelboards[]= new JLabel[5];
-            jLabelboards[0]=jLabelBoardC1;
-            jLabelboards[1]=jLabelBoardC2;
-            jLabelboards[2]=jLabelBoardC3;
-            jLabelboards[3]=jLabelBoardC4;
-            jLabelboards[4]=jLabelBoardC5;
-           int i=0;
-        for(Carta c: cartas){
-            ImageIcon icon1 = new ImageIcon("img/"+c.toString()+".png");
-            jLabelboards[i].setIcon(resizeImage(icon1.getImage(),64,79));
+        List<Carta> cartas = controller.getBoardCard();
+        JLabel jLabelboards[] = new JLabel[5];
+        jLabelboards[0] = jLabelBoardC1;
+        jLabelboards[1] = jLabelBoardC2;
+        jLabelboards[2] = jLabelBoardC3;
+        jLabelboards[3] = jLabelBoardC4;
+        jLabelboards[4] = jLabelBoardC5;
+        int i = 0;
+        for (Carta c : cartas) {
+            ImageIcon icon1 = new ImageIcon("img/" + c.toString() + ".png");
+            jLabelboards[i].setIcon(resizeImage(icon1.getImage(), 64, 79));
             i++;
         }
-        if(cartas.size()==5){
+        if (cartas.size() == 5) {
             jButtonBoardRandom.setEnabled(false);
             jButtonEnterBoard.setEnabled(false);
             jTextFieldBoard.setEnabled(false);
@@ -1113,13 +1089,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalculateActionPerformed
         // TODO add your handling code here:
-        controller.calcularPuntosJugadores(5-controller.getBoardCard().size());
-        jLabelEquity1.setText(String.format("%.3f",controller.getEquity().get(0))+"%");
-        jLabelEquity2.setText(String.format("%.3f",controller.getEquity().get(1))+"%");
-        jLabelEquity3.setText(String.format("%.3f",controller.getEquity().get(2))+"%");
-        jLabelEquity4.setText(String.format("%.3f",controller.getEquity().get(3))+"%");
-        jLabelEquity5.setText(String.format("%.3f",controller.getEquity().get(4))+"%");
-        jLabelEquity6.setText(String.format("%.3f",controller.getEquity().get(5))+"%");
+        controller.calcularPuntosJugadores(5 - controller.getBoardCard().size());
+        jLabelEquity1.setText(String.format("%.3f", controller.getEquity().get(0)) + "%");
+        jLabelEquity2.setText(String.format("%.3f", controller.getEquity().get(1)) + "%");
+        jLabelEquity3.setText(String.format("%.3f", controller.getEquity().get(2)) + "%");
+        jLabelEquity4.setText(String.format("%.3f", controller.getEquity().get(3)) + "%");
+        jLabelEquity5.setText(String.format("%.3f", controller.getEquity().get(4)) + "%");
+        jLabelEquity6.setText(String.format("%.3f", controller.getEquity().get(5)) + "%");
     }//GEN-LAST:event_jButtonCalculateActionPerformed
 
     private void jButtonFold1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFold1ActionPerformed
@@ -1152,6 +1128,7 @@ public class MainFrame extends javax.swing.JFrame {
         return new ImageIcon(scaledImage);
 
     }
+
     /*
      * @param args the command line arguments
      */
@@ -1186,6 +1163,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
+
     public void setController(Controller controller) {
         this.controller = controller;
     }
