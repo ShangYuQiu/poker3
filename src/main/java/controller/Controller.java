@@ -49,10 +49,20 @@ public class Controller {
     public void setLogica() {
         this.logica = new Logic();
     }
-    public Map<Integer,Double> getEquity(){
-        return this.logica.getEquity();
+    public double getEquity(int id){
+        if(this.logica.getEquity().get(id) != null){
+            return this.logica.getEquity().get(id);
+        }
+        
+        else {
+            return 0.0;
+        }
     }
     public void calcularPuntosJugadores(int numCartasAleatorias){
         this.logica.calcularPuntosJugadores(numCartasAleatorias);
+    }
+    
+    public void foldJug(int id){
+        this.logica.foldJug(id);
     }
 }

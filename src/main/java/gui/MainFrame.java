@@ -1090,36 +1090,42 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButtonCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalculateActionPerformed
         // TODO add your handling code here:
         controller.calcularPuntosJugadores(5 - controller.getBoardCard().size());
-        jLabelEquity1.setText(String.format("%.3f", controller.getEquity().get(0)) + "%");
-        jLabelEquity2.setText(String.format("%.3f", controller.getEquity().get(1)) + "%");
-        jLabelEquity3.setText(String.format("%.3f", controller.getEquity().get(2)) + "%");
-        jLabelEquity4.setText(String.format("%.3f", controller.getEquity().get(3)) + "%");
-        jLabelEquity5.setText(String.format("%.3f", controller.getEquity().get(4)) + "%");
-        jLabelEquity6.setText(String.format("%.3f", controller.getEquity().get(5)) + "%");
+        jLabelEquity1.setText(String.format("%.3f",controller.getEquity(0))+ "%");
+        jLabelEquity2.setText(String.format("%.3f",controller.getEquity(1))+ "%");
+        jLabelEquity3.setText(String.format("%.3f",controller.getEquity(2))+ "%");
+        jLabelEquity4.setText(String.format("%.3f",controller.getEquity(3))+ "%");
+        jLabelEquity5.setText(String.format("%.3f",controller.getEquity(4))+ "%");
+        jLabelEquity6.setText(String.format("%.3f",controller.getEquity(5))+ "%");
     }//GEN-LAST:event_jButtonCalculateActionPerformed
 
     private void jButtonFold1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFold1ActionPerformed
         // TODO add your handling code here:
+        controller.foldJug(0);
     }//GEN-LAST:event_jButtonFold1ActionPerformed
 
     private void jButtonFold2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFold2ActionPerformed
         // TODO add your handling code here:
+        controller.foldJug(1);
     }//GEN-LAST:event_jButtonFold2ActionPerformed
 
     private void jButtonFold3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFold3ActionPerformed
         // TODO add your handling code here:
+        controller.foldJug(2);
     }//GEN-LAST:event_jButtonFold3ActionPerformed
 
     private void jButtonFold4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFold4ActionPerformed
         // TODO add your handling code here:
+        controller.foldJug(3);
     }//GEN-LAST:event_jButtonFold4ActionPerformed
 
     private void jButtonFold5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFold5ActionPerformed
         // TODO add your handling code here:
+        controller.foldJug(4);
     }//GEN-LAST:event_jButtonFold5ActionPerformed
 
     private void jButtonFold6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFold6ActionPerformed
         // TODO add your handling code here:
+        controller.foldJug(5);
     }//GEN-LAST:event_jButtonFold6ActionPerformed
     private ImageIcon resizeImage(Image image, int width, int height) {
 

@@ -334,6 +334,12 @@ public class Logic {
         cartasRestantes.remove(card2);
         jugadores.put(idJugador, new Jugador(card, idJugador));
     }
+    
+    //fold del jugador id
+    public void foldJug(int id){
+        jugadores.remove(id);
+        equity.remove(id);
+    }
 
     //Inicializar el board
     public void enterBoardCard(String carta) {
