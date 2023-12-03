@@ -90,48 +90,48 @@ public class Logic {
         boolean esMejor = false;
         List<Carta> j1 = iz.getCartas();
         List<Carta> j2 = dr.getCartas();
-        if(iz.getJugada().toString().equals("FULL_HOUSE")){
-            if(j1.get(0).getVal()==j1.get(2).getVal()&&
-                    j2.get(0).getVal()==j2.get(2).getVal()){
-                if ((j1.get(0).getVal() > j2.get(0).getVal())||
-                        (j1.get(0).getVal()==j2.get(0).getVal()&&
-                        j1.get(3).getVal() > j2.get(3).getVal())) {
-                    return true;
-                }
-            }
-            else if(j1.get(0).getVal()==j1.get(2).getVal()&&
-                    j2.get(2).getVal()==j2.get(4).getVal()){
-                if ((j1.get(0).getVal() > j2.get(2).getVal())||
-                        (j1.get(0).getVal()==j2.get(2).getVal()&&
-                        j1.get(3).getVal() > j2.get(0).getVal())) {
-                    return true;
-                }
-            }
-            else if(j1.get(2).getVal()==j1.get(4).getVal()&&
-                    j2.get(2).getVal()==j2.get(4).getVal()){
-                if ((j1.get(2).getVal() > j2.get(2).getVal())||
-                        (j1.get(2).getVal()==j2.get(2).getVal()&&
-                        j1.get(0).getVal() > j2.get(0).getVal())) {
-                    return true;
-                }
-            }
-             else if(j1.get(2).getVal()==j1.get(4).getVal()&&
-                    j2.get(0).getVal()==j2.get(2).getVal()){
-                if ((j1.get(2).getVal() > j2.get(0).getVal())||
-                        (j1.get(2).getVal()==j2.get(0).getVal()&&
-                        j1.get(0).getVal() > j2.get(3).getVal())) {
-                    return true;
-                }
+//        if(iz.getJugada().toString().equals("FULL_HOUSE")){
+//            if(j1.get(0).getVal()==j1.get(2).getVal()&&
+//                    j2.get(0).getVal()==j2.get(2).getVal()){
+//                if ((j1.get(0).getVal() > j2.get(0).getVal())||
+//                        (j1.get(0).getVal()==j2.get(0).getVal()&&
+//                        j1.get(3).getVal() > j2.get(3).getVal())) {
+//                    return true;
+//                }
+//            }
+//            else if(j1.get(0).getVal()==j1.get(2).getVal()&&
+//                    j2.get(2).getVal()==j2.get(4).getVal()){
+//                if ((j1.get(0).getVal() > j2.get(2).getVal())||
+//                        (j1.get(0).getVal()==j2.get(2).getVal()&&
+//                        j1.get(3).getVal() > j2.get(0).getVal())) {
+//                    return true;
+//                }
+//            }
+//            else if(j1.get(2).getVal()==j1.get(4).getVal()&&
+//                    j2.get(2).getVal()==j2.get(4).getVal()){
+//                if ((j1.get(2).getVal() > j2.get(2).getVal())||
+//                        (j1.get(2).getVal()==j2.get(2).getVal()&&
+//                        j1.get(0).getVal() > j2.get(0).getVal())) {
+//                    return true;
+//                }
+//            }
+//             else if(j1.get(2).getVal()==j1.get(4).getVal()&&
+//                    j2.get(0).getVal()==j2.get(2).getVal()){
+//                if ((j1.get(2).getVal() > j2.get(0).getVal())||
+//                        (j1.get(2).getVal()==j2.get(0).getVal()&&
+//                        j1.get(0).getVal() > j2.get(3).getVal())) {
+//                    return true;
+//                }
+//            }
+//        }
+//        else{
+        for (int i = 0; i < iz.getCartas().size(); i++) {
+            //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
+            if (j1.get(i).getVal() > j2.get(i).getVal()) {
+                return true;
             }
         }
-        else{
-            for (int i = 0; i < iz.getCartas().size(); i++) {
-                //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
-                if (j1.get(i).getVal() > j2.get(i).getVal()) {
-                    return true;
-                }
-            }
-        }
+//        }
 
         return esMejor;
     }
@@ -180,7 +180,7 @@ public class Logic {
         if (aux.size() > 1) {
             for (int id : aux) {
                 Jugada jugada = jugadas.get(id);
-                System.out.println(jugada.getCartas());
+//                System.out.println(jugada.getCartas());
                 if (jugadaActual == null) {
                     jugadaActual = jugada;
                     idJugadores.add(id);
@@ -193,8 +193,7 @@ public class Logic {
                 }
             }
 
-        }
-        else{
+        } else {
             idJugadores.add(aux.get(0));
         }
 
@@ -205,12 +204,12 @@ public class Logic {
             } else {
                 this.vecesGanadas.put(idJugadores.get(0), this.vecesGanadas.get(idJugadores.get(0)) + 1);
             }
-        } else if(idJugadores.size() > 1){
+        } else if (idJugadores.size() > 1) {
             this.empates++;
         }
-        for(int id:idJugadores){
-            System.out.println(id);
-        }
+//        for(int id:idJugadores){
+//            System.out.println(id);
+//        }
         return idJugadores;
     }
 
@@ -229,7 +228,7 @@ public class Logic {
 
             
             numComb++;
-            
+
             //La lista de cartas, sumando las del board y las del jugador
             List<Carta> cartas = new ArrayList<>();
 
@@ -239,7 +238,11 @@ public class Logic {
             for (Map.Entry<Integer, Jugador> entrada : this.jugadores.entrySet()) {
                 Integer idJugador = entrada.getKey();  //Id del jugador
                 List<Carta> manoJugador = entrada.getValue().getCartas();   //Mano inicial del jugador
+<<<<<<< Updated upstream
                 cartas.addAll(this.board);
+=======
+//                System.out.println(manoJugador);
+>>>>>>> Stashed changes
                 //Inserta todas las cartas del board de manera ordenada
                 cartas.addAll(combinacion);
                 //Inserta las cartas de la mano del jugador de manera ordenada
@@ -247,9 +250,9 @@ public class Logic {
                 System.out.println(cartas);
                 //Listo para ver si forma alguna jugada
                 Jugada jugada = evalue(cartas);
-                System.out.println(idJugador+" "+jugada.getJugada()+" "+jugada.getCartas());
+//                System.out.println(idJugador+" "+jugada.getJugada()+" "+jugada.getCartas());
                 jugadas.put(idJugador, jugada);
-                
+
                 //Borrar las cartas para la siguiente iteracion
                 cartas.clear();
             }
@@ -269,7 +272,7 @@ public class Logic {
         for (Map.Entry<Integer, Integer> entrada : this.vecesGanadas.entrySet()) {
             System.out.println("Jugador " + entrada.getKey() + " : " + entrada.getValue());
         }
-        
+
         System.out.println("Numero de empates: " + this.empates);
 
     }
@@ -291,17 +294,16 @@ public class Logic {
         return this.equity;
     }
 
-    //Elimina las cartas duplicadas 
-    public void eliminarRep() {
-        //Eliminar cartas que ya han aparecido en el board del total de cartas
-        cartasRestantes.removeAll(board);
-
-        //Bucle para eliminar del total, las manos iniciales de cada jugador
-        for (int i = 0; i < 6; i++) {
-            cartasRestantes.removeAll(jugadores.get(i).getCartas());
-        }
-    }
-
+//    //Elimina las cartas duplicadas 
+//    public void eliminarRep() {
+//        //Eliminar cartas que ya han aparecido en el board del total de cartas
+//        cartasRestantes.removeAll(board);
+//
+//        //Bucle para eliminar del total, las manos iniciales de cada jugador
+//        for (int i = 0; i < 6; i++) {
+//            cartasRestantes.removeAll(jugadores.get(i).getCartas());
+//        }
+//    }
     //Introducir carta al board
     public void addBoard(Carta c) {
         this.board.add(c);
@@ -453,7 +455,7 @@ public class Logic {
     }
 
     //Devuelve el mejor quad (Funciona)
-    private Jugada Poker(List<Carta> c) {
+    public Jugada Poker(List<Carta> c) {
         Jugada poker = null;
 
         int i = 0;
@@ -471,6 +473,12 @@ public class Logic {
 
                 //Si la jugada llega a tener 4 cartas iguales => quad
                 if (tmp.size() == 4) {
+
+                    //Para meter el kicker
+                    List<Carta> tmp2 = new ArrayList<>(c);
+                    tmp2.removeAll(tmp);
+                    tmp.add(tmp2.get(0));
+
                     poker = new Jugada(tmp, tJugada.POKER);
                     return poker;
                 }
@@ -485,7 +493,7 @@ public class Logic {
     }
 
     //Devuelve el mejor full house (Funciona)
-    private Jugada FullHouse(List<Carta> c) {
+    public Jugada FullHouse(List<Carta> c) {
         Jugada fullhouse = null;
 
         Jugada trio = Trio(c); //Devuelve el mejor trio
@@ -493,14 +501,14 @@ public class Logic {
         List<Carta> tmp = new ArrayList<>(c);
 
         if (trio != null) {
-            tmp.removeAll(trio.getCartas());
+            tmp.removeAll(trio.getCartas().subList(0, 3));
 
             Jugada pareja = Pareja(tmp);
 
             if (pareja != null) {
                 List<Carta> tmp2 = new ArrayList<>();
-                tmp2.addAll(trio.getCartas());
-                tmp2.addAll(pareja.getCartas());
+                tmp2.addAll(trio.getCartas().subList(0, 3));
+                tmp2.addAll(pareja.getCartas().subList(0, 1));
                 fullhouse = new Jugada(tmp2, tJugada.FULL_HOUSE);
             }
 
@@ -510,7 +518,7 @@ public class Logic {
     }
 
     //Devuelve el mejor Flush (Funciona)
-    private Jugada Flush(List<Carta> c) {
+    public Jugada Flush(List<Carta> c) {
         Jugada flush = null;
 
         //Contador para cartas de cada palo
@@ -576,7 +584,7 @@ public class Logic {
     }
 
     //Devuelve el mejor trio (Funciona)
-    private Jugada Trio(List<Carta> c) {
+    public Jugada Trio(List<Carta> c) {
         Jugada trio = null;
 
         int i = 0;
@@ -595,6 +603,12 @@ public class Logic {
 
                 //Si ya hay 3 cartas iguales
                 if (tmp.size() == 3) {
+
+                    //Para meter los kickers
+                    List<Carta> tmp2 = new ArrayList<>(c);
+                    tmp2.removeAll(tmp);
+                    tmp.add(tmp2.get(0));
+                    tmp.add(tmp2.get(1));
                     trio = new Jugada(tmp, tJugada.TRIO);
                     return trio;
 
@@ -610,7 +624,7 @@ public class Logic {
     }
 
     //Devuelve la mejor doble pareja (Funciona)
-    private Jugada DoblePareja(List<Carta> c) {
+    public Jugada DoblePareja(List<Carta> c) {
         Jugada doblePareja = null;
 
         List<Carta> aux = new ArrayList<>(c);
@@ -649,6 +663,8 @@ public class Logic {
                 aux2.add(cur);
                 aux2.add(sig);
 
+                //Para meter el kicker
+                aux2.add(aux.get(0));
                 doblePareja = new Jugada(aux2, tJugada.DOBLE_PAREJA);
                 break;
             }
@@ -659,7 +675,7 @@ public class Logic {
     }
 
     //Devuelve la mejor pareja (Funciona)
-    private Jugada Pareja(List<Carta> c) {
+    public Jugada Pareja(List<Carta> c) {
         Jugada pareja = null;
         int i = 0;
         while (i < c.size() - 1) {
@@ -667,10 +683,25 @@ public class Logic {
             Carta sig = c.get(i + 1);
             if (cur.getVal() == sig.getVal()) {
                 List<Carta> aux = new ArrayList<>();
+                List<Carta> aux2 = new ArrayList<>(c);
 
                 //La pareja
                 aux.add(cur);
                 aux.add(sig);
+
+                //Para meter los kickers
+                aux2.removeAll(aux);
+
+                //Para cuando se llame desde FullHouse no se salga de los indices
+                if (c.size() == 7) {
+                    aux.add(aux2.get(0));
+                    aux.add(aux2.get(1));
+                    aux.add(aux2.get(2));
+                }
+                else {
+                    aux.add(aux2.get(0));
+                    aux.add(aux2.get(1));
+                }
                 pareja = new Jugada(aux, tJugada.PAREJA);
                 break;
             }
