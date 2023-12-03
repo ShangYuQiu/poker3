@@ -123,12 +123,6 @@ public class Logic {
                     return true;
                 }
             }
-        }else if(iz.getJugada().toString().equals("DOBLE_PAREJA")){
-           if ((j1.get(0).getVal() > j2.get(0).getVal())||
-                        (j1.get(0).getVal()==j2.get(0).getVal()&&
-                        j1.get(2).getVal() > j2.get(2).getVal())) {
-                    return true;
-                }
         }
         else{
             for (int i = 0; i < iz.getCartas().size(); i++) {
