@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Jugada {
@@ -9,7 +8,8 @@ public class Jugada {
     private tJugada tipoJugada; //Tipo de jugada, escalera, color, mano alta...
 
     public Jugada(List<Carta> cartas, tJugada tipoJugada) {
-        this.cartas = new ArrayList<>(cartas);
+        this.cartas = new SortedArrayList<>();
+        this.cartas.addAll(cartas);
         this.tipoJugada = tipoJugada;
     }
 

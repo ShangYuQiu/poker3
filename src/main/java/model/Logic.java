@@ -90,41 +90,7 @@ public class Logic {
         boolean esMejor = false;
         List<Carta> j1 = iz.getCartas();
         List<Carta> j2 = dr.getCartas();
-//        if(iz.getJugada().toString().equals("FULL_HOUSE")){
-//            if(j1.get(0).getVal()==j1.get(2).getVal()&&
-//                    j2.get(0).getVal()==j2.get(2).getVal()){
-//                if ((j1.get(0).getVal() > j2.get(0).getVal())||
-//                        (j1.get(0).getVal()==j2.get(0).getVal()&&
-//                        j1.get(3).getVal() > j2.get(3).getVal())) {
-//                    return true;
-//                }
-//            }
-//            else if(j1.get(0).getVal()==j1.get(2).getVal()&&
-//                    j2.get(2).getVal()==j2.get(4).getVal()){
-//                if ((j1.get(0).getVal() > j2.get(2).getVal())||
-//                        (j1.get(0).getVal()==j2.get(2).getVal()&&
-//                        j1.get(3).getVal() > j2.get(0).getVal())) {
-//                    return true;
-//                }
-//            }
-//            else if(j1.get(2).getVal()==j1.get(4).getVal()&&
-//                    j2.get(2).getVal()==j2.get(4).getVal()){
-//                if ((j1.get(2).getVal() > j2.get(2).getVal())||
-//                        (j1.get(2).getVal()==j2.get(2).getVal()&&
-//                        j1.get(0).getVal() > j2.get(0).getVal())) {
-//                    return true;
-//                }
-//            }
-//             else if(j1.get(2).getVal()==j1.get(4).getVal()&&
-//                    j2.get(0).getVal()==j2.get(2).getVal()){
-//                if ((j1.get(2).getVal() > j2.get(0).getVal())||
-//                        (j1.get(2).getVal()==j2.get(0).getVal()&&
-//                        j1.get(0).getVal() > j2.get(3).getVal())) {
-//                    return true;
-//                }
-//            }
-//        }
-//        else{
+
         for (int i = 0; i < iz.getCartas().size(); i++) {
             //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
             if (j1.get(i).getVal() > j2.get(i).getVal()) {
@@ -207,9 +173,6 @@ public class Logic {
         } else if (idJugadores.size() > 1) {
             this.empates++;
         }
-//        for(int id:idJugadores){
-//            System.out.println(id);
-//        }
         return idJugadores;
     }
 
@@ -238,19 +201,14 @@ public class Logic {
             for (Map.Entry<Integer, Jugador> entrada : this.jugadores.entrySet()) {
                 Integer idJugador = entrada.getKey();  //Id del jugador
                 List<Carta> manoJugador = entrada.getValue().getCartas();   //Mano inicial del jugador
-<<<<<<< Updated upstream
+
                 cartas.addAll(this.board);
-=======
-//                System.out.println(manoJugador);
->>>>>>> Stashed changes
                 //Inserta todas las cartas del board de manera ordenada
                 cartas.addAll(combinacion);
                 //Inserta las cartas de la mano del jugador de manera ordenada
                 cartas.addAll(manoJugador);
-                System.out.println(cartas);
                 //Listo para ver si forma alguna jugada
                 Jugada jugada = evalue(cartas);
-//                System.out.println(idJugador+" "+jugada.getJugada()+" "+jugada.getCartas());
                 jugadas.put(idJugador, jugada);
 
                 //Borrar las cartas para la siguiente iteracion
@@ -266,14 +224,14 @@ public class Logic {
                 jugadores.get(id).sumaPuntos(puntos);
             }
         }
-
-        System.out.println("Numero de combos totales: " + numComb);
-
-        for (Map.Entry<Integer, Integer> entrada : this.vecesGanadas.entrySet()) {
-            System.out.println("Jugador " + entrada.getKey() + " : " + entrada.getValue());
-        }
-
-        System.out.println("Numero de empates: " + this.empates);
+//
+//        System.out.println("Numero de combos totales: " + numComb);
+//
+//        for (Map.Entry<Integer, Integer> entrada : this.vecesGanadas.entrySet()) {
+//            System.out.println("Jugador " + entrada.getKey() + " : " + entrada.getValue());
+//        }
+//
+//        System.out.println("Numero de empates: " + this.empates);
 
     }
 
@@ -473,12 +431,6 @@ public class Logic {
 
                 //Si la jugada llega a tener 4 cartas iguales => quad
                 if (tmp.size() == 4) {
-
-                    //Para meter el kicker
-                    List<Carta> tmp2 = new ArrayList<>(c);
-                    tmp2.removeAll(tmp);
-                    tmp.add(tmp2.get(0));
-
                     poker = new Jugada(tmp, tJugada.POKER);
                     return poker;
                 }
@@ -603,12 +555,6 @@ public class Logic {
 
                 //Si ya hay 3 cartas iguales
                 if (tmp.size() == 3) {
-
-                    //Para meter los kickers
-                    List<Carta> tmp2 = new ArrayList<>(c);
-                    tmp2.removeAll(tmp);
-                    tmp.add(tmp2.get(0));
-                    tmp.add(tmp2.get(1));
                     trio = new Jugada(tmp, tJugada.TRIO);
                     return trio;
 
@@ -617,9 +563,9 @@ public class Logic {
                 ++j;
             }
 
-            ++i;
+            ++i;          
         }
-
+        
         return trio;
     }
 
@@ -656,21 +602,18 @@ public class Logic {
             Carta sig = aux.get(j + 1);
 
             if (cur.getVal() == sig.getVal()) {
-
+                
                 aux.remove(cur);
                 aux.remove(sig);
 
                 aux2.add(cur);
                 aux2.add(sig);
-
-                //Para meter el kicker
-                aux2.add(aux.get(0));
                 doblePareja = new Jugada(aux2, tJugada.DOBLE_PAREJA);
                 break;
             }
             j++;
         }
-
+        
         return doblePareja;
     }
 
@@ -683,25 +626,10 @@ public class Logic {
             Carta sig = c.get(i + 1);
             if (cur.getVal() == sig.getVal()) {
                 List<Carta> aux = new ArrayList<>();
-                List<Carta> aux2 = new ArrayList<>(c);
-
+                
                 //La pareja
                 aux.add(cur);
-                aux.add(sig);
-
-                //Para meter los kickers
-                aux2.removeAll(aux);
-
-                //Para cuando se llame desde FullHouse no se salga de los indices
-                if (c.size() == 7) {
-                    aux.add(aux2.get(0));
-                    aux.add(aux2.get(1));
-                    aux.add(aux2.get(2));
-                }
-                else {
-                    aux.add(aux2.get(0));
-                    aux.add(aux2.get(1));
-                }
+                aux.add(sig); 
                 pareja = new Jugada(aux, tJugada.PAREJA);
                 break;
             }
