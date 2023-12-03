@@ -225,8 +225,7 @@ public class Logic {
 
         //Para cada posible combinacion
         for (List<Carta> combinacion : this.combinaciones) {
-
-            
+           
             numComb++;
 
             //La lista de cartas, sumando las del board y las del jugador
@@ -238,11 +237,9 @@ public class Logic {
             for (Map.Entry<Integer, Jugador> entrada : this.jugadores.entrySet()) {
                 Integer idJugador = entrada.getKey();  //Id del jugador
                 List<Carta> manoJugador = entrada.getValue().getCartas();   //Mano inicial del jugador
-<<<<<<< Updated upstream
+
                 cartas.addAll(this.board);
-=======
 //                System.out.println(manoJugador);
->>>>>>> Stashed changes
                 //Inserta todas las cartas del board de manera ordenada
                 cartas.addAll(combinacion);
                 //Inserta las cartas de la mano del jugador de manera ordenada
