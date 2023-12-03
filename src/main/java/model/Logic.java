@@ -221,13 +221,13 @@ public class Logic {
 
         //Generar las combinaciones segun el numero de cartas aleatorias, si se escoge en 5 en 5, de 3 en 3, simulando las distintas fases de la partida, preflop, river...
         generarCombinaciones(this.cartasRestantes, numCartasAleatorias, combinacionActual, 0);
-
+        
         int numComb = 0;
 
         //Para cada posible combinacion
         for (List<Carta> combinacion : this.combinaciones) {
 
-            System.out.println(combinacion);
+            
             numComb++;
             
             //La lista de cartas, sumando las del board y las del jugador
@@ -239,12 +239,12 @@ public class Logic {
             for (Map.Entry<Integer, Jugador> entrada : this.jugadores.entrySet()) {
                 Integer idJugador = entrada.getKey();  //Id del jugador
                 List<Carta> manoJugador = entrada.getValue().getCartas();   //Mano inicial del jugador
-                System.out.println(manoJugador);
+                cartas.addAll(this.board);
                 //Inserta todas las cartas del board de manera ordenada
                 cartas.addAll(combinacion);
                 //Inserta las cartas de la mano del jugador de manera ordenada
                 cartas.addAll(manoJugador);
-
+                System.out.println(cartas);
                 //Listo para ver si forma alguna jugada
                 Jugada jugada = evalue(cartas);
                 System.out.println(idJugador+" "+jugada.getJugada()+" "+jugada.getCartas());
@@ -672,5 +672,14 @@ public class Logic {
         }
 
         return pareja;
+    }
+    
+    public void clearPuntos(int jug){
+        jugadores.get(jug).clearPuntos();
+    }
+    public void clearAllJugPuntos(){
+        for(int jug:this.jugadores.keySet()){
+            clearPuntos(jug);
+        }
     }
 }

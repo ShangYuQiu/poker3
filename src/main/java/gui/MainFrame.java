@@ -600,7 +600,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -632,7 +632,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButtonFold1)
                     .addComponent(jButtonFold2)
                     .addComponent(jButtonFold3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1096,6 +1096,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelEquity4.setText(String.format("%.3f", controller.getEquity().get(3)) + "%");
         jLabelEquity5.setText(String.format("%.3f", controller.getEquity().get(4)) + "%");
         jLabelEquity6.setText(String.format("%.3f", controller.getEquity().get(5)) + "%");
+        controller.clearAllJugPuntos();
     }//GEN-LAST:event_jButtonCalculateActionPerformed
 
     private void jButtonFold1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFold1ActionPerformed

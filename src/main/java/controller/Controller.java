@@ -55,4 +55,10 @@ public class Controller {
     public void calcularPuntosJugadores(int numCartasAleatorias){
         this.logica.calcularPuntosJugadores(numCartasAleatorias);
     }
+    public void clearPuntos(int jug){
+        this.logica.clearPuntos(jug);
+    }
+    public void clearAllJugPuntos(){
+        this.logica.clearAllJugPuntos();
+    }
 }

@@ -44,4 +44,7 @@ public class Jugador {
     public void setMejorJugada(Jugada j) {
         this.mejorJugada = j;
     }
+    public void clearPuntos(){
+        this.puntos=0;
+    }
 }
