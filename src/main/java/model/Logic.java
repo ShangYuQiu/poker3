@@ -17,6 +17,8 @@ public class Logic {
     private Map<Integer, Jugador> jugadores;    //Par id jugador y el jugador corrspondiente
     private List<List<Carta>> combinaciones;    //Todas las combinaciones de cartas con los elementos de cartasRestantes
     private Map<Integer, Double> equity;    //Par id jugador y el equity asociado 
+    private Map<Integer, Integer> vecesGanadas; //Par id jugador y las veces que gana el pot
+    private int empates = 0;
     private Controller controller;
 
     public Logic() {
@@ -25,6 +27,7 @@ public class Logic {
         this.cartasRestantes = new ArrayList<>();
         this.combinaciones = new ArrayList<>();
         this.equity = new HashMap<>();
+        this.vecesGanadas = new HashMap<>();
         init();
     }
 
@@ -143,7 +146,7 @@ public class Logic {
         Jugada jugadaActual = null;
         if (aux.size() > 1) {
             for (int id : aux) {
-                Jugada jugada = jugadores.get(id).getJugada();
+                Jugada jugada = this.jugadores.get(id).getJugada();
 
                 if (jugadaActual == null) {
                     jugadaActual = jugada;
@@ -156,6 +159,21 @@ public class Logic {
                     idJugadores.add(id);
                 }
             }
+
+        }
+        else{
+            idJugadores.add(aux.get(0));
+        }
+
+        //Para comproabr cuantas veces se ganan sin empate
+        if (idJugadores.size() == 1) {
+            if (!this.vecesGanadas.containsKey(idJugadores.get(0))) {
+                this.vecesGanadas.put(idJugadores.get(0), 1);
+            } else {
+                this.vecesGanadas.put(idJugadores.get(0), this.vecesGanadas.get(idJugadores.get(0)) + 1);
+            }
+        } else if(idJugadores.size() > 1){
+            this.empates++;
         }
 
         return idJugadores;
@@ -169,11 +187,16 @@ public class Logic {
         //Generar las combinaciones segun el numero de cartas aleatorias, si se escoge en 5 en 5, de 3 en 3, simulando las distintas fases de la partida, preflop, river...
         generarCombinaciones(this.cartasRestantes, numCartasAleatorias, combinacionActual, 0);
 
+        int numComb = 0;
+
         //Para cada posible combinacion
         for (List<Carta> combinacion : this.combinaciones) {
 
+            System.out.println(combinacion);
+            numComb++;
+
             //La lista de cartas, sumando las del board y las del jugador
-            List<Carta> cartas = new SortedArrayList<>();
+            List<Carta> cartas = new ArrayList<>();
 
             //Mapa id jugador y la mejor jugada encontrada
             Map<Integer, Jugada> jugadas = new HashMap<>();
@@ -204,6 +227,14 @@ public class Logic {
                 jugadores.get(id).sumaPuntos(puntos);
             }
         }
+
+        System.out.println("Numero de combos totales: " + numComb);
+
+        for (Map.Entry<Integer, Integer> entrada : this.vecesGanadas.entrySet()) {
+            System.out.println("Jugador " + entrada.getKey() + " : " + entrada.getValue());
+        }
+        
+        System.out.println("Numero de empates: " + this.empates);
 
     }
 
