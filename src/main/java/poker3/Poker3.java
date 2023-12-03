@@ -7,12 +7,12 @@ import model.Logic;
 public class Poker3 {
 
     public static void main(String[] args) {
-        Logic logica = new Logic();
+        Logic logic = new Logic();
         MainFrame frame = new MainFrame();
-        Controller controller = new Controller(logica, frame);
-        logica.setController(controller);
+        Controller controller = new Controller(logic, frame);
+        logic.setController(controller);
         frame.setController(controller);
         frame.setVisible(true);
-        
+
     }
 }

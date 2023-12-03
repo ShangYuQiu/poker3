@@ -312,6 +312,7 @@ public class Logic {
         return board;
     }
 
+    //Devuelve la mejor escalera de color (Funciona)
     private Jugada EscaleraColor(List<Carta> c) {
         Jugada escaleraColor = null;
 
@@ -345,8 +346,8 @@ public class Logic {
         return escaleraColor;
     }
 
-    //Comprueba si hay escalera
-    public Jugada Escalera(List<Carta> c) {
+    //Devuelve la mejor escalera (Funciona)
+    private Jugada Escalera(List<Carta> c) {
         Jugada escalera = null;
 
         int i = 0;
@@ -378,7 +379,7 @@ public class Logic {
         return escalera;
     }
 
-    //Comprueba si hay poker
+    //Devuelve el mejor quad (Funciona)
     private Jugada Poker(List<Carta> c) {
         Jugada poker = null;
 
@@ -389,7 +390,6 @@ public class Logic {
             Carta cur = c.get(i);    //Valor de la ultima carta que se tiene para formar la jugada
 
             int j = i + 1;
-            Carta kicker = null;
             while (j < c.size()) {
                 //Si las 2 cartas es tienen el mismo valor
                 if (cur.getSimb().equals(c.get(j).getSimb())) {
@@ -398,9 +398,6 @@ public class Logic {
 
                 //Si la jugada llega a tener 4 cartas iguales => quad
                 if (tmp.size() == 4) {
-                    List<Carta> tmp2 = new ArrayList<>(c);
-                    tmp2.removeAll(tmp);
-                    tmp.add(tmp2.get(0));
                     poker = new Jugada(tmp, tJugada.POKER);
                     return poker;
                 }
@@ -414,51 +411,29 @@ public class Logic {
         return poker;
     }
 
-    //Comprueba si hay full house
+    //Devuelve el mejor full house (Funciona)
     private Jugada FullHouse(List<Carta> c) {
-        Jugada fullHouse = null;
-        boolean trio = false;
+        Jugada fullhouse = null;
+
+        Jugada trio = Trio(c); //Devuelve el mejor trio
+
         List<Carta> tmp = new ArrayList<>(c);
-        //Lista auxiliar que almacenan las cartas que forman el Full House
-        ArrayList<Carta> lista = new ArrayList<>();
-        int cont = 1;
-        int i = 0;
 
-        while (i < tmp.size() - 1) {
-            int cur = tmp.get(i).getVal();
-            int sig = tmp.get(i + 1).getVal();
+        if (trio != null) {
+            tmp.removeAll(trio.getCartas());
 
-            if (cur == sig) {
-                cont++;
-                if (cont == 3) {
-                    lista.add(tmp.get(i - 1));
-                    lista.add(tmp.get(i));
-                    lista.add(tmp.get(i + 1));
-                    trio = true;
-                    cont = 1;
-                }
-            } else {//si se corta en medio                             
-                if (cont == 2) {
+            Jugada pareja = Pareja(tmp);
 
-                    lista.add(tmp.get(i - 1));
-                    lista.add(tmp.get(i));
-                }
-                cont = 1;
+            if (pareja != null) {
+                List<Carta> tmp2 = new ArrayList<>();
+                tmp2.addAll(trio.getCartas());
+                tmp2.addAll(pareja.getCartas());
+                fullhouse = new Jugada(tmp2, tJugada.FULL_HOUSE);
             }
 
-            if (i == tmp.size() - 2 && cont == 2) {
-                lista.add(tmp.get(i - 1));
-                lista.add(tmp.get(i));
-            }
-            i++;
         }
 
-        if (lista.size() > 4 && trio) {
-            if (!lista.isEmpty()) {
-                fullHouse = new Jugada(tmp, tJugada.FULL_HOUSE);
-            }
-        }
-        return fullHouse;
+        return fullhouse;
     }
 
     //Devuelve el mejor Flush (Funciona)
@@ -527,8 +502,8 @@ public class Logic {
         return flush;
     }
 
-    //Devuelve el mejor trio si la hay
-    public Jugada Trio(List<Carta> c) {
+    //Devuelve el mejor trio (Funciona)
+    private Jugada Trio(List<Carta> c) {
         Jugada trio = null;
 
         int i = 0;
@@ -539,7 +514,6 @@ public class Logic {
 
             int j = i + 1;
             while (j < c.size()) {
-
                 int sig = c.get(j).getVal();
 
                 if (cur == sig) {
@@ -548,10 +522,6 @@ public class Logic {
 
                 //Si ya hay 3 cartas iguales
                 if (tmp.size() == 3) {
-                    List<Carta> tmp2 = new ArrayList<>(c);
-                    tmp2.removeAll(tmp);
-                    tmp.add(tmp2.get(0));
-                    tmp.add(tmp2.get(1));
                     trio = new Jugada(tmp, tJugada.TRIO);
                     return trio;
 
@@ -566,7 +536,6 @@ public class Logic {
         return trio;
     }
 
-
     //Devuelve la mejor doble pareja (Funciona)
     private Jugada DoblePareja(List<Carta> c) {
         Jugada doblePareja = null;
@@ -574,7 +543,7 @@ public class Logic {
         List<Carta> aux = new ArrayList<>(c);
         List<Carta> aux2 = new ArrayList<>();
         boolean ok = false;
-        
+
         //Se busca la primera pareja
         int i = 0;
         while (i < c.size() - 1) {
@@ -596,17 +565,16 @@ public class Logic {
         int j = 0;
 
         while (j < aux.size() - 1 && ok) {
-            Carta cur = c.get(j);
-            Carta sig = c.get(j + 1);
+            Carta cur = aux.get(j);
+            Carta sig = aux.get(j + 1);
 
             if (cur.getVal() == sig.getVal()) {
-                
+
                 aux.remove(cur);
                 aux.remove(sig);
-                
+
                 aux2.add(cur);
                 aux2.add(sig);
-                aux2.add(aux.get(0)); //El kicker
 
                 doblePareja = new Jugada(aux2, tJugada.DOBLE_PAREJA);
                 break;
@@ -626,22 +594,13 @@ public class Logic {
             Carta cur = c.get(i);
             Carta sig = c.get(i + 1);
             if (cur.getVal() == sig.getVal()) {
-                //Mete la pareja de carta al principio de la jugada
-                List<Carta> aux = new ArrayList<>(c);
-                List<Carta> aux2 = new ArrayList<>();
-                aux.remove(cur);
-                aux.remove(sig);
-                
+                List<Carta> aux = new ArrayList<>();
+
                 //La pareja
-                aux2.add(cur);
-                aux2.add(sig);
-                //Los kickers
-                aux2.add(aux.get(0));
-                aux2.add(aux.get(1));
-                aux2.add(aux.get(2));
-                
-                
-                pareja = new Jugada(aux2, tJugada.PAREJA);
+                aux.add(cur);
+                aux.add(sig);
+
+                pareja = new Jugada(aux, tJugada.PAREJA);
                 break;
             }
             i++;
