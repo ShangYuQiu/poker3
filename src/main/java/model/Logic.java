@@ -188,8 +188,7 @@ public class Logic {
 
         //Para cada posible combinacion
         for (List<Carta> combinacion : this.combinaciones) {
-
-            
+           
             numComb++;
 
             //La lista de cartas, sumando las del board y las del jugador
