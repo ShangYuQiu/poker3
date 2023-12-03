@@ -2,6 +2,7 @@ package model;
 
 import controller.Controller;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -89,15 +90,16 @@ public class Logic {
     public boolean esMejorJugada(Jugada iz, Jugada dr) {
         boolean esMejor = false;
         List<Carta> j1 = iz.getCartas();
-        List<Carta> j2 = dr.getCartas();
-
-        for (int i = 0; i < iz.getCartas().size(); i++) {
+        List<Carta> j2 = dr.getCartas();       
             //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
-            if (j1.get(i).getVal() > j2.get(i).getVal()) {
-                return true;
+            
+             for (int i = 0; i < iz.getCartas().size(); i++) {
+            //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
+                if (j1.get(i).getVal() > j2.get(i).getVal()) {
+
+                    return true;
+                }
             }
-        }
-//        }
 
         return esMejor;
     }
@@ -348,19 +350,28 @@ public class Logic {
     private Jugada EscaleraColor(List<Carta> c) {
         Jugada escaleraColor = null;
 
+        List<Carta> aux = new ArrayList<>(c);
+        
+        if(aux.get(0).getSimb() == "A"){ //caso 5 4 3 2 A
+            Carta card = new Carta (aux.get(0).getSimb(),aux.get(0).getPalo());
+            card.setValor(1);
+            aux.add(card);
+        }
+        Collections.sort(aux);
+        
         int i = 0;
-        while (i < c.size()) {
+        while (i <aux.size()) {
             ArrayList<Carta> tmp = new ArrayList<>(); //Lista que guarda las carta forma la escalera de color
-            tmp.add(c.get(i));  //Inserta la primera carta a partir de la cual empieza la busqueda
-            String palo = c.get(i).getPalo();   //El palo que se busca         
-            int cur = c.get(i).getVal();    //La carta sobre la que se empieza la busqueda
+            tmp.add(aux.get(i));  //Inserta la primera carta a partir de la cual empieza la busqueda
+            String palo = aux.get(i).getPalo();   //El palo que se busca         
+            int cur = aux.get(i).getVal();    //La carta sobre la que se empieza la busqueda
 
             int j = i + 1;
-            while (j < c.size()) {
+            while (j < aux.size()) {
                 //Si es del mismo valo y su diferencia vale 1
-                if (cur - c.get(j).getVal() == 1 && palo.equals(c.get(j).getPalo())) {
-                    tmp.add(c.get(j));   //Se inserta en la lista
-                    cur = c.get(j).getVal();    //Se actualiza el ultimo valor
+                if (cur - aux.get(j).getVal() == 1 && palo.equals(aux.get(j).getPalo())) {
+                    tmp.add(aux.get(j));   //Se inserta en la lista
+                    cur = aux.get(j).getVal();    //Se actualiza el ultimo valor
                 }
 
                 //Si la jugada llega a tener 5 cartas => Escalera Color
@@ -381,19 +392,27 @@ public class Logic {
     //Devuelve la mejor escalera (Funciona)
     private Jugada Escalera(List<Carta> c) {
         Jugada escalera = null;
-
+        
+        List<Carta> aux = new ArrayList<>(c);
+        
+        if(aux.get(0).getSimb() == "A"){ //caso 5 4 3 2 A
+            Carta card = new Carta (aux.get(0).getSimb(),aux.get(0).getPalo());
+            card.setValor(1);
+            aux.add(card);
+        }
+        Collections.sort(aux);
         int i = 0;
-        while (i < c.size()) {
+        while (i < aux.size()) {
             ArrayList<Carta> tmp = new ArrayList<>(); //Lista que guarda las carta forma la escalera de color
-            tmp.add(c.get(i));  //Inserta la primera carta a partir de la cual empieza la busqueda       
-            int cur = c.get(i).getVal();    //Valor de la ultima carta que se tiene para formar la jugada
+            tmp.add(aux.get(i));  //Inserta la primera carta a partir de la cual empieza la busqueda       
+            int cur = aux.get(i).getVal();    //Valor de la ultima carta que se tiene para formar la jugada
 
             int j = i + 1;
-            while (j < c.size()) {
+            while (j < aux.size()) {
                 //Si es del mismo valo y su diferencia vale 1
-                if (cur - c.get(j).getVal() == 1) {
-                    tmp.add(c.get(j));   //Se inserta en la lista
-                    cur = c.get(j).getVal();    //Se actualiza el ultimo valor
+                if (cur - aux.get(j).getVal() == 1) {
+                    tmp.add(aux.get(j));   //Se inserta en la lista
+                    cur = aux.get(j).getVal();    //Se actualiza el ultimo valor
                 }
 
                 //Si la jugada llega a tener 5 cartas => Escalera 
