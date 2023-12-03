@@ -61,8 +61,15 @@ public class Controller {
     public void calcularPuntosJugadores(int numCartasAleatorias){
         this.logica.calcularPuntosJugadores(numCartasAleatorias);
     }
-    
+
     public void foldJug(int id){
         this.logica.foldJug(id);
+    }
+    public void clearPuntos(int jug){
+        this.logica.clearPuntos(jug);
+    }
+    
+    public void clearAllJugPuntos(){
+        this.logica.clearAllJugPuntos();
     }
 }
