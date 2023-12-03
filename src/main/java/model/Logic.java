@@ -88,14 +88,54 @@ public class Logic {
     //Compara 2 jugadas, devuelve true si la jugada de la iz es mejor
     public boolean esMejorJugada(Jugada iz, Jugada dr) {
         boolean esMejor = false;
-
         List<Carta> j1 = iz.getCartas();
         List<Carta> j2 = dr.getCartas();
-
-        for (int i = 0; i < 5; ++i) {
-            //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
-            if (j1.get(i).getVal() > j2.get(i).getVal()) {
-                return true;
+        if(iz.getJugada().toString().equals("FULL_HOUSE")){
+            if(j1.get(0).getVal()==j1.get(2).getVal()&&
+                    j2.get(0).getVal()==j2.get(2).getVal()){
+                if ((j1.get(0).getVal() > j2.get(0).getVal())||
+                        (j1.get(0).getVal()==j2.get(0).getVal()&&
+                        j1.get(3).getVal() > j2.get(3).getVal())) {
+                    return true;
+                }
+            }
+            else if(j1.get(0).getVal()==j1.get(2).getVal()&&
+                    j2.get(2).getVal()==j2.get(4).getVal()){
+                if ((j1.get(0).getVal() > j2.get(2).getVal())||
+                        (j1.get(0).getVal()==j2.get(2).getVal()&&
+                        j1.get(3).getVal() > j2.get(0).getVal())) {
+                    return true;
+                }
+            }
+            else if(j1.get(2).getVal()==j1.get(4).getVal()&&
+                    j2.get(2).getVal()==j2.get(4).getVal()){
+                if ((j1.get(2).getVal() > j2.get(2).getVal())||
+                        (j1.get(2).getVal()==j2.get(2).getVal()&&
+                        j1.get(0).getVal() > j2.get(0).getVal())) {
+                    return true;
+                }
+            }
+             else if(j1.get(2).getVal()==j1.get(4).getVal()&&
+                    j2.get(0).getVal()==j2.get(2).getVal()){
+                if ((j1.get(2).getVal() > j2.get(0).getVal())||
+                        (j1.get(2).getVal()==j2.get(0).getVal()&&
+                        j1.get(0).getVal() > j2.get(3).getVal())) {
+                    return true;
+                }
+            }
+        }else if(iz.getJugada().toString().equals("DOBLE_PAREJA")){
+           if ((j1.get(0).getVal() > j2.get(0).getVal())||
+                        (j1.get(0).getVal()==j2.get(0).getVal()&&
+                        j1.get(2).getVal() > j2.get(2).getVal())) {
+                    return true;
+                }
+        }
+        else{
+            for (int i = 0; i < iz.getCartas().size(); i++) {
+                //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
+                if (j1.get(i).getVal() > j2.get(i).getVal()) {
+                    return true;
+                }
             }
         }
 
@@ -109,7 +149,7 @@ public class Logic {
         List<Carta> j1 = iz.getCartas();
         List<Carta> j2 = dr.getCartas();
 
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < iz.getCartas().size(); i++) {
             if (j1.get(i).getVal() != j2.get(i).getVal()) {
                 return false;
             }
@@ -127,7 +167,6 @@ public class Logic {
         for (Map.Entry<Integer, Jugada> entrada : jugadas.entrySet()) {
             Integer idJugador = entrada.getKey();
             tJugada jugada = entrada.getValue().getJugada();
-
             //Si la jugada actual es mejor que la mejorJugada
             if (mejorJugada == null) {
                 aux.add(idJugador);
@@ -146,8 +185,8 @@ public class Logic {
         Jugada jugadaActual = null;
         if (aux.size() > 1) {
             for (int id : aux) {
-                Jugada jugada = this.jugadores.get(id).getJugada();
-
+                Jugada jugada = jugadas.get(id);
+                System.out.println(jugada.getCartas());
                 if (jugadaActual == null) {
                     jugadaActual = jugada;
                     idJugadores.add(id);
@@ -175,7 +214,9 @@ public class Logic {
         } else if(idJugadores.size() > 1){
             this.empates++;
         }
-
+        for(int id:idJugadores){
+            System.out.println(id);
+        }
         return idJugadores;
     }
 
@@ -194,7 +235,7 @@ public class Logic {
 
             System.out.println(combinacion);
             numComb++;
-
+            
             //La lista de cartas, sumando las del board y las del jugador
             List<Carta> cartas = new ArrayList<>();
 
@@ -204,7 +245,7 @@ public class Logic {
             for (Map.Entry<Integer, Jugador> entrada : this.jugadores.entrySet()) {
                 Integer idJugador = entrada.getKey();  //Id del jugador
                 List<Carta> manoJugador = entrada.getValue().getCartas();   //Mano inicial del jugador
-
+                System.out.println(manoJugador);
                 //Inserta todas las cartas del board de manera ordenada
                 cartas.addAll(combinacion);
                 //Inserta las cartas de la mano del jugador de manera ordenada
@@ -212,8 +253,9 @@ public class Logic {
 
                 //Listo para ver si forma alguna jugada
                 Jugada jugada = evalue(cartas);
+                System.out.println(idJugador+" "+jugada.getJugada()+" "+jugada.getCartas());
                 jugadas.put(idJugador, jugada);
-
+                
                 //Borrar las cartas para la siguiente iteracion
                 cartas.clear();
             }
@@ -619,7 +661,6 @@ public class Logic {
     //Devuelve la mejor pareja (Funciona)
     private Jugada Pareja(List<Carta> c) {
         Jugada pareja = null;
-
         int i = 0;
         while (i < c.size() - 1) {
             Carta cur = c.get(i);
@@ -630,7 +671,6 @@ public class Logic {
                 //La pareja
                 aux.add(cur);
                 aux.add(sig);
-
                 pareja = new Jugada(aux, tJugada.PAREJA);
                 break;
             }
