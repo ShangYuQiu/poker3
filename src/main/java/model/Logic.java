@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Logic {
 
@@ -89,23 +89,18 @@ public class Logic {
     //Compara 2 jugadas, devuelve true si la jugada de la iz es mejor
     public boolean esMejorJugada(Jugada iz, Jugada dr) {
         List<Carta> j1 = iz.getCartas();
-        List<Carta> j2 = dr.getCartas();       
-            //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
-            
-             for (int i = 0; i < iz.getCartas().size(); i++) {
-            //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
-                if (j1.get(i).getVal() > j2.get(i).getVal()) {
+        List<Carta> j2 = dr.getCartas();
+        //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
 
-                    return true;
-                }
-            }
-<<<<<<< Updated upstream
-=======
-            else if (j1.get(i).getVal() < j2.get(i).getVal()){
+        for (int i = 0; i < iz.getCartas().size(); i++) {
+            //Si la Jugada1, su i-iesima carta es mejor que la Jugada2
+            if (j1.get(i).getVal() > j2.get(i).getVal()) {
+                return true;
+            } 
+            else if (j1.get(i).getVal() < j2.get(i).getVal()) {
                 break;
             }
         }
->>>>>>> Stashed changes
 
         return false;
     }
@@ -136,8 +131,8 @@ public class Logic {
             Integer idJugador = entrada.getKey();
             tJugada jugada = entrada.getValue().getJugada();
 
-            //Imprimir cada jugada para visualizar
-            System.out.println("Jugador " + idJugador + ": " + jugada.toString() + " " + entrada.getValue().getCartas() + '\n');
+//            //Imprimir cada jugada para visualizar
+//            System.out.println("Jugador " + idJugador + ": " + jugada.toString() + " " + entrada.getValue().getCartas() + '\n');
 
             //Si la jugada actual es mejor que la mejorJugada
             if (mejorJugada == null) {
@@ -152,8 +147,6 @@ public class Logic {
                 aux.add(idJugador);
             }
         }
-
-        System.out.println("Numero de jugadas que pasan a la segunda fase : " + aux.size() + '\n');
 
         //En caso de que varios jugadores tuvieran la misma jugada, ver quien/es ganan 
         Jugada jugadaActual = null;
@@ -177,22 +170,21 @@ public class Logic {
             idJugadores.add(aux.get(0));
         }
 
-        System.out.println("Ganadores: ");
-
-        for (Integer id : idJugadores) {
-            System.out.println("Jugador :" + id + '\n');
-        }
-
-        //Para comproabr cuantas veces se ganan sin empate
-        if (idJugadores.size() == 1) {
-            if (!this.vecesGanadas.containsKey(idJugadores.get(0))) {
-                this.vecesGanadas.put(idJugadores.get(0), 1);
-            } else {
-                this.vecesGanadas.put(idJugadores.get(0), this.vecesGanadas.get(idJugadores.get(0)) + 1);
-            }
-        } else if (idJugadores.size() > 1) {
-            this.empates++;
-        }
+//        System.out.println("Ganadores: ");
+//
+//        for (Integer id : idJugadores) {
+//            System.out.println("Jugador : " + id + '\n');
+//        }
+//        //Para comproabr cuantas veces se ganan sin empate
+//        if (idJugadores.size() == 1) {
+//            if (!this.vecesGanadas.containsKey(idJugadores.get(0))) {
+//                this.vecesGanadas.put(idJugadores.get(0), 1);
+//            } else {
+//                this.vecesGanadas.put(idJugadores.get(0), this.vecesGanadas.get(idJugadores.get(0)) + 1);
+//            }
+//        } else if (idJugadores.size() > 1) {
+//            this.empates++;
+//        }
         return idJugadores;
     }
 
@@ -244,13 +236,13 @@ public class Logic {
             }
         }
 
-        System.out.println("Numero de combos totales: " + numComb);
-
-        for (Map.Entry<Integer, Integer> entrada : this.vecesGanadas.entrySet()) {
-            System.out.println("Jugador " + entrada.getKey() + " : " + entrada.getValue());
-        }
-
-        System.out.println("Numero de empates: " + this.empates);
+//        System.out.println("Numero de combos totales: " + numComb);
+//
+//        for (Map.Entry<Integer, Integer> entrada : this.vecesGanadas.entrySet()) {
+//            System.out.println("Jugador " + entrada.getKey() + " : " + entrada.getValue());
+//        }
+//
+//        System.out.println("Numero de empates: " + this.empates);
 
     }
 
@@ -359,16 +351,16 @@ public class Logic {
         Jugada escaleraColor = null;
 
         List<Carta> aux = new ArrayList<>(c);
-        
-        if(aux.get(0).getSimb() == "A"){ //caso 5 4 3 2 A
-            Carta card = new Carta (aux.get(0).getSimb(),aux.get(0).getPalo());
+
+        if (aux.get(0).getSimb().equals("A")) { //caso 5 4 3 2 A
+            Carta card = new Carta(aux.get(0).getSimb(), aux.get(0).getPalo());
             card.setValor(1);
             aux.add(card);
         }
         Collections.sort(aux);
-        
+
         int i = 0;
-        while (i <aux.size()) {
+        while (i < aux.size()) {
             ArrayList<Carta> tmp = new ArrayList<>(); //Lista que guarda las carta forma la escalera de color
             tmp.add(aux.get(i));  //Inserta la primera carta a partir de la cual empieza la busqueda
             String palo = aux.get(i).getPalo();   //El palo que se busca         
@@ -400,11 +392,11 @@ public class Logic {
     //Encuentra la mejor escalera en la lista ordenada de cartas
     private Jugada Escalera(List<Carta> c) {
         Jugada escalera = null;
-        
+
         List<Carta> aux = new ArrayList<>(c);
-        
-        if(aux.get(0).getSimb() == "A"){ //caso 5 4 3 2 A
-            Carta card = new Carta (aux.get(0).getSimb(),aux.get(0).getPalo());
+
+        if (aux.get(0).getSimb().equals("A")) { //caso 5 4 3 2 A
+            Carta card = new Carta(aux.get(0).getSimb(), aux.get(0).getPalo());
             card.setValor(1);
             aux.add(card);
         }
@@ -457,7 +449,7 @@ public class Logic {
 
                 //Si la jugada llega a tener 4 cartas iguales => quad
                 if (tmp.size() == 4) {
-                    
+
                     //Kicker
                     List<Carta> tmp2 = new ArrayList<>(c);
                     tmp2.removeAll(tmp);
@@ -587,13 +579,13 @@ public class Logic {
 
                 //Si ya hay 3 cartas iguales
                 if (tmp.size() == 3) {
-                    
+
                     //Kicker
                     List<Carta> tmp2 = new ArrayList<>(c);
-                    tmp2.removeAll(tmp);                   
+                    tmp2.removeAll(tmp);
                     tmp.add(tmp2.get(0));
                     tmp.add(tmp2.get(1));
-                    
+
                     trio = new Jugada(tmp, tJugada.TRIO);
                     return trio;
 
@@ -647,10 +639,10 @@ public class Logic {
 
                 aux2.add(cur);
                 aux2.add(sig);
-                
+
                 //Kicker
                 aux2.add(aux.get(0));
-                
+
                 doblePareja = new Jugada(aux2, tJugada.DOBLE_PAREJA);
                 break;
             }
@@ -673,23 +665,20 @@ public class Logic {
                 //La pareja
                 aux.add(cur);
                 aux.add(sig);
-                
-                
+
                 //Kicker
                 List<Carta> tmp = new ArrayList<>(c);
                 tmp.removeAll(aux);
-                
-                if(tmp.size() >= 3){
+
+                if (tmp.size() >= 3) {
                     aux.add(tmp.get(0));
                     aux.add(tmp.get(1));
                     aux.add(tmp.get(2));
-                }
-                else{
+                } else {
                     aux.add(tmp.get(0));
                     aux.add(tmp.get(1));
                 }
-                
-                
+
                 pareja = new Jugada(aux, tJugada.PAREJA);
                 break;
             }
