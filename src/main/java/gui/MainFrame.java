@@ -102,7 +102,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonFold6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(new ImageIcon("img/mesa.jpg").getImage());
+        setIconImage(new ImageIcon("img/poker.png").getImage());
 
         jLabel1.setText("jugador6");
 
@@ -1172,7 +1172,7 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new MainFrame().setVisible(true);
-                MainFrame m = new MainFrame();
+               MainFrame m = new MainFrame();
                ImageIcon backg = new ImageIcon ("img/mesa.jpg");
                 JPanel backgroundPanel = new JPanel() {
                     @Override
