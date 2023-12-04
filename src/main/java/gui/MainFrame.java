@@ -1,11 +1,13 @@
 package gui;
 
 import controller.Controller;
+import java.awt.Graphics;
 import java.util.List;
 import javax.swing.JLabel;
 import java.awt.Image;
 import model.*;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -100,6 +102,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButtonFold6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon("img/mesa.jpg").getImage());
 
         jLabel1.setText("jugador6");
 
@@ -1021,6 +1024,7 @@ public class MainFrame extends javax.swing.JFrame {
             jButtonBoardRandom.setEnabled(false);
             jButtonEnterBoard.setEnabled(false);
             jTextFieldBoard.setEnabled(false);
+            
         }
     }//GEN-LAST:event_jButtonBoardEnterActionPerformed
 
@@ -1167,7 +1171,23 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                //new MainFrame().setVisible(true);
+                MainFrame m = new MainFrame();
+               ImageIcon backg = new ImageIcon ("img/mesa.jpg");
+                JPanel backgroundPanel = new JPanel() {
+                    @Override
+                    protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    // Dibujar la imagen de fondo
+                    g.drawImage(backg.getImage(), 0, 0, getWidth(), getHeight(), this);
+                    }
+                };
+                backgroundPanel.setLayout(null);
+                m.setContentPane(backgroundPanel);
+               //m.setIconImage(new ImageIcon("img/mesa.jpg").getImage());
+               m.pack();
+               m.setVisible(true);
+                
             }
         });
     }
