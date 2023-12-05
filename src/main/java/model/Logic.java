@@ -708,7 +708,7 @@ public class Logic {
     //Para calcular equity del modo Ohama
     //cada jugador tiene 4 cartas propias
     //Hay que formar con 2 cartas propias y 3 comunes
-    private void generarCombinacionesOhama(List<Carta> cartas, int tamCombinacion, List<Carta> combinacionActual, int indice,List<List<Carta>> listaCom) {
+    private void generarCombinacionesOmaha(List<Carta> cartas, int tamCombinacion, List<Carta> combinacionActual, int indice,List<List<Carta>> listaCom) {
         if (combinacionActual.size() == tamCombinacion) {
             listaCom.add(new ArrayList<>(combinacionActual));
             return;
@@ -716,7 +716,7 @@ public class Logic {
 
         for (int i = indice; i < cartas.size(); i++) {
             combinacionActual.add(cartas.get(i));
-            generarCombinacionesOhama(cartas, tamCombinacion, combinacionActual, i + 1,listaCom);
+            generarCombinacionesOmaha(cartas, tamCombinacion, combinacionActual, i + 1,listaCom);
             combinacionActual.remove(combinacionActual.size() - 1);
         }
     }
@@ -737,7 +737,7 @@ public class Logic {
             List<Carta> combinacionActual1 = new ArrayList<>();
            cartaRst.addAll(combinacion);
            cartaRst.addAll(board);
-           generarCombinacionesOhama(cartaRst, 3, combinacionActual1, 0,comb);
+           generarCombinacionesOmaha(cartaRst, 3, combinacionActual1, 0,comb);
             Map<Integer, Jugada> jugadas = new HashMap<>();
            for(List<Carta> card: comb){
 
@@ -746,7 +746,7 @@ public class Logic {
                     List<Carta> manoJugador = entrada.getValue().getCartas();   //Mano inicial del jugador
                     List<Carta> combinacionActualCartaPropia = new ArrayList<>(); 
                     List<List<Carta>> combinacionCartaPropia=new ArrayList<>();
-                    generarCombinacionesOhama(manoJugador, 2, combinacionActualCartaPropia, 0,combinacionCartaPropia);
+                    generarCombinacionesOmaha(manoJugador, 2, combinacionActualCartaPropia, 0,combinacionCartaPropia);
                     for(List<Carta> c:combinacionCartaPropia){
                          List<Carta> cartas = new ArrayList<>();
                         //Inserta tres las cartas del board + cartas restantes de manera ordenada
