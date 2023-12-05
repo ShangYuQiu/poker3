@@ -42,6 +42,9 @@
           <Color id="Default Cursor"/>
         </Property>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jTabbedPane1StateChanged"/>
       </Events>
@@ -1132,8 +1135,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Ohama">
-                <Property name="tabTitle" type="java.lang.String" value="Ohama"/>
+              <JTabbedPaneConstraints tabName="Omaha">
+                <Property name="tabTitle" type="java.lang.String" value="Omaha"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
