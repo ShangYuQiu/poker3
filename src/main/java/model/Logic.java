@@ -286,14 +286,16 @@ public class Logic {
     //Inicializa nuevo jugador con sus cartas
     public void enterJugCard(int idJugador, String carta) {
         String c[] = carta.split(",");
-        List<Carta> card = new ArrayList<>();
-        Carta card1 = new Carta(c[0].substring(0, 1), c[0].substring(1, 2));
-        Carta card2 = new Carta(c[1].substring(0, 1), c[1].substring(1, 2));
-        card.add(card1);
-        card.add(card2);
-        cartasRestantes.remove(card1);
-        cartasRestantes.remove(card2);
-        jugadores.put(idJugador, new Jugador(card, idJugador));
+        List<Carta> cartas = new ArrayList<>();
+        for(int i=0;i<c.length;i++){
+            cartas.add(new Carta(c[i].substring(0, 1), c[i].substring(1, 2)));
+        }
+        cartasRestantes.removeAll(cartas);
+        if(jugadores.containsKey(idJugador)){
+            cartas.addAll(jugadores.get(idJugador).getCartas());
+            jugadores.remove(idJugador);
+        }
+        jugadores.put(idJugador, new Jugador(cartas, idJugador));
     }
 
     //fold del jugador id
@@ -322,6 +324,10 @@ public class Logic {
         Carta carta2 = getRandomCarta();
         c.add(carta2);
         this.cartasRestantes.remove(carta2);
+        if(jugadores.containsKey(jugador)){
+            c.addAll(jugadores.get(jugador).getCartas());
+            jugadores.remove(jugador);
+        }
         jugadores.put(jugador, new Jugador(c, jugador));
     }
 
@@ -674,7 +680,7 @@ public class Logic {
                     aux.add(tmp.get(0));
                     aux.add(tmp.get(1));
                     aux.add(tmp.get(2));
-                } else {
+                } else if(tmp.size()>1) {
                     aux.add(tmp.get(0));
                     aux.add(tmp.get(1));
                 }
@@ -697,4 +703,83 @@ public class Logic {
             clearPuntos(jug);
         }
     }
+    
+    //--------------------------------------------------------------------
+    //Para calcular equity del modo Ohama
+    //cada jugador tiene 4 cartas propias
+    //Hay que formar con 2 cartas propias y 3 comunes
+    private void generarCombinacionesOhama(List<Carta> cartas, int tamCombinacion, List<Carta> combinacionActual, int indice,List<List<Carta>> listaCom) {
+        if (combinacionActual.size() == tamCombinacion) {
+            listaCom.add(new ArrayList<>(combinacionActual));
+            return;
+        }
+
+        for (int i = indice; i < cartas.size(); i++) {
+            combinacionActual.add(cartas.get(i));
+            generarCombinacionesOhama(cartas, tamCombinacion, combinacionActual, i + 1,listaCom);
+            combinacionActual.remove(combinacionActual.size() - 1);
+        }
+    }
+    public void calcularPuntosJugadoresOmaha() {
+        
+        List<Carta> combinacionActual = new ArrayList<>();  //Lista auxiliar para la funcion recursiva
+        this.combinaciones.clear();
+        //Generar las combinaciones de 5-numeros cartas board con cartas restantes
+        generarCombinaciones(this.cartasRestantes, 5-this.board.size(), combinacionActual, 0);
+
+        int numComb = 0;
+        for (List<Carta> combinacion : this.combinaciones) {
+           List<List<Carta>> comb=new ArrayList<>();
+            numComb++;
+
+
+            List<Carta> cartaRst = new ArrayList<>();
+            List<Carta> combinacionActual1 = new ArrayList<>();
+           cartaRst.addAll(combinacion);
+           cartaRst.addAll(board);
+           generarCombinacionesOhama(cartaRst, 3, combinacionActual1, 0,comb);
+            Map<Integer, Jugada> jugadas = new HashMap<>();
+           for(List<Carta> card: comb){
+
+                for (Map.Entry<Integer, Jugador> entrada : this.jugadores.entrySet()) {
+                    Integer idJugador = entrada.getKey();  //Id del jugador
+                    List<Carta> manoJugador = entrada.getValue().getCartas();   //Mano inicial del jugador
+                    List<Carta> combinacionActualCartaPropia = new ArrayList<>(); 
+                    List<List<Carta>> combinacionCartaPropia=new ArrayList<>();
+                    generarCombinacionesOhama(manoJugador, 2, combinacionActualCartaPropia, 0,combinacionCartaPropia);
+                    for(List<Carta> c:combinacionCartaPropia){
+                         List<Carta> cartas = new ArrayList<>();
+                        //Inserta tres las cartas del board + cartas restantes de manera ordenada
+                        cartas.addAll(card);
+                        //Inserta dos cartas de la mano del jugador de manera ordenada
+                        cartas.addAll(c);
+                        //Listo para ver si forma alguna jugada
+                        Jugada jugada = evalue(cartas);
+                        //guardar la mejor jugada
+                        if (!jugadas.containsKey(idJugador)) {
+                            jugadas.put(idJugador, jugada);
+                        } else if (jugada.getJugada().compareTo(jugadas.get(idJugador).getJugada()) > 0) {
+                            jugadas.put(idJugador, jugada);
+                        }else if(jugada.getJugada().compareTo(jugadas.get(idJugador).getJugada()) == 0){
+                            if (esMejorJugada(jugada, jugadas.get(idJugador))) {
+                                jugadas.put(idJugador, jugada);
+                            }
+                        }
+                        //Borrar las cartas para la siguiente iteracion
+                        cartas.clear();
+                    }
+                } 
+            }
+            //Lista de jugadores que se hay que puntuar
+            List<Integer> idJugadores = puntuaJugadores(jugadas);
+            double puntos = 1.00 / idJugadores.size();
+            //Sumar puntos a los jugadores
+            for (Integer id : idJugadores) {
+                jugadores.get(id).sumaPuntos(puntos);
+            }    
+        }
+
+    }
 }
+
+

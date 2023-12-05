@@ -62,6 +62,9 @@ public class Controller {
         this.logica.calcularPuntosJugadores(numCartasAleatorias);
     }
 
+    public void calcularPuntosJugadoresOmaha(){
+        this.logica.calcularPuntosJugadoresOmaha();
+    }
     public void foldJug(int id){
         this.logica.foldJug(id);
     }
